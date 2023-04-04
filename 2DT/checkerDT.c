@@ -53,6 +53,7 @@ boolean CheckerDT_Node_isValid(Node_T oNNode) {
 */
 static boolean CheckerDT_treeCheck(Node_T oNNode) {
    size_t ulIndex;
+   size_t ulIndexB;
 
    if(oNNode!= NULL) {
 
@@ -64,17 +65,31 @@ static boolean CheckerDT_treeCheck(Node_T oNNode) {
       /* Recur on every child of oNNode */
       for(ulIndex = 0; ulIndex < Node_getNumChildren(oNNode); ulIndex++)
       {
-         Node_T oNChild = NULL;
-         int iStatus = Node_getChild(oNNode, ulIndex, &oNChild);
+        Node_T oNChild = NULL;
+        int iStatus = Node_getChild(oNNode, ulIndex, &oNChild);
 
-         if(iStatus != SUCCESS) {
-            fprintf(stderr, "getNumChildren claims more children than getChild returns\n");
-            return FALSE;
-         }
+        if(iStatus != SUCCESS) {
+           fprintf(stderr, "getNumChildren claims more children than getChild returns\n");
+           return FALSE;
+        }
 
-         /* if recurring down one subtree results in a failed check
+        /* check if there is another child of the same name */
+        for(ulIndexB = 0;
+            ulIndexB < Node_getNumChildren(oNNode);
+            ulIndexB++) {
+            Node_T oNChildB = NULL
+            
+            int iStatus = Node_getChild(oNNode, ulIndexB, &oNChildB);
+
+            if(Node_compare(oNChild, oNChildB) == 0) {
+                fprintf(stderr, "More than one identical nodes at %s\n",
+                 Path_getPathname(Node_getPath(oNNode)));
+            }
+        }
+
+        /* if recurring down one subtree results in a failed check
             farther down, passes the failure back up immediately */
-         if(!CheckerDT_treeCheck(oNChild))
+        if(!CheckerDT_treeCheck(oNChild))
             return FALSE;
       }
    }
