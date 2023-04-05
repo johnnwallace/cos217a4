@@ -74,22 +74,24 @@ static boolean CheckerDT_treeCheck(Node_T oNNode) {
         }
 
         /* check if there is another child of the same name */
-        /* for(ulIndexB = 0;
+        for(ulIndexB = 0;
             ulIndexB < Node_getNumChildren(oNNode);
             ulIndexB++) {
             Node_T oNChildB = NULL;
             
+            /* ignore case where indices are the same */
             if (ulIndex == ulIndexB)
                 continue;
 
             iStatus = Node_getChild(oNNode, ulIndexB, &oNChildB);
+            /* DO WE NEED TO CHECK iStatus??????? */
 
             if(Node_compare(oNChild, oNChildB) == 0) {
                 fprintf(stderr, "More than one identical nodes at %s\n",
                     Path_getPathname(Node_getPath(oNNode)));
                 return FALSE;
             }
-        } */
+        }
 
         /* if recurring down one subtree results in a failed check
             farther down, passes the failure back up immediately */

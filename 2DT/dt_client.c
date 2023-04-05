@@ -64,7 +64,7 @@ int main(void) {
   assert(DT_insert("anotherRoot") == CONFLICTING_PATH);
   assert(DT_contains("anotherRoot") == FALSE);
   assert(DT_contains("1root/2second") == FALSE);
-  assert(DT_insert("1root/2child/3grandchild") == ALREADY_IN_TREE);
+  assert(DT_insert("1root/2child/3grandchild") == ALREADY_IN_TREE); /* failing */
   assert(DT_insert("anotherRoot/2nope/3noteven") == CONFLICTING_PATH);
 
   /* Trying to insert a third child should succeed, unlike in BDT */
