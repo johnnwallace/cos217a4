@@ -79,6 +79,10 @@ static boolean CheckerDT_treeCheck(Node_T oNNode) {
             ulIndexB++) {
             Node_T oNChildB = NULL;
             
+            /* skip case where indices are identical */
+            if (ulIndex == ulIndexB)
+                continue;
+
             iStatus = Node_getChild(oNNode, ulIndexB, &oNChildB);
             /* DO WE NEED TO CHECK iStatus???? */
 
