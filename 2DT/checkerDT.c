@@ -80,12 +80,7 @@ static boolean CheckerDT_treeCheck(Node_T oNNode) {
             Node_T oNChildB = NULL;
             
             iStatus = Node_getChild(oNNode, ulIndexB, &oNChildB);
-            /* DO WE NEED THIS????? */
-            if(iStatus != SUCCESS) {
-                fprintf(stderr, "getNumChildren claims more
-                                 children than getChild returns\n");
-                return FALSE;
-            }
+            /* DO WE NEED TO CHECK iStatus???? */
 
             if(Node_compare(oNChild, oNChildB) == 0) {
                 fprintf(stderr, "More than one identical nodes at %s\n",
