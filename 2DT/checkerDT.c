@@ -77,7 +77,7 @@ static boolean CheckerDT_treeCheck(Node_T oNNode) {
         for(ulIndexB = 0;
             ulIndexB < Node_getNumChildren(oNNode);
             ulIndexB++) {
-            Node_T oNChildB = NULL
+            Node_T oNChildB = NULL;
             
             int iStatus = Node_getChild(oNNode, ulIndexB, &oNChildB);
 
