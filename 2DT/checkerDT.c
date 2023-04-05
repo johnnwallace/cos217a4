@@ -88,7 +88,7 @@ static boolean CheckerDT_treeCheck(Node_T oNNode) {
 
             if(Node_compare(oNChild, oNChildB) == 0) {
                 fprintf(stderr, "More than one identical nodes at %s\n",
-                    Path_getPathname(Node_getPath(oNNode));
+                    Path_getPathname(Node_getPath(oNNode)));
                 return FALSE;
             }
         }
