@@ -79,11 +79,18 @@ static boolean CheckerDT_treeCheck(Node_T oNNode) {
             ulIndexB++) {
             Node_T oNChildB = NULL;
             
-            int iStatus = Node_getChild(oNNode, ulIndexB, &oNChildB);
+            iStatus = Node_getChild(oNNode, ulIndexB, &oNChildB);
+            /* DO WE NEED THIS????? */
+            if(iStatus != SUCCESS) {
+                fprintf(stderr, "getNumChildren claims more
+                                 children than getChild returns\n");
+                return FALSE;
+            }
 
             if(Node_compare(oNChild, oNChildB) == 0) {
                 fprintf(stderr, "More than one identical nodes at %s\n",
-                 Path_getPathname(Node_getPath(oNNode)));
+                    Path_getPathname(Node_getPath(oNNode)));
+                return FALSE;
             }
         }
 
