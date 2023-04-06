@@ -54,6 +54,7 @@ boolean CheckerDT_Node_isValid(Node_T oNNode) {
 static boolean CheckerDT_treeCheck(Node_T oNNode) {
    size_t ulIndex;
    size_t ulIndexB;
+   unsigned int sizeCheck;
 
    if(oNNode!= NULL) {
 
@@ -62,11 +63,16 @@ static boolean CheckerDT_treeCheck(Node_T oNNode) {
       if(!CheckerDT_Node_isValid(oNNode))
          return FALSE;
 
+      sizeCheck = 1;
+
       /* Recur on every child of oNNode */
       for(ulIndex = 0; ulIndex < Node_getNumChildren(oNNode); ulIndex++)
       {
         Node_T oNChild = NULL;
         Node_T oNChildPrev = NULL;
+        Path_T path = NULL;
+        Path_T pathPrev = NULL;
+
 
         int iStatus = Node_getChild(oNNode, ulIndex, &oNChild);
         if (ulIndex != 0)
@@ -79,6 +85,8 @@ static boolean CheckerDT_treeCheck(Node_T oNNode) {
            return FALSE;
         }
 
+
+
         /* make sure nodes are stored lexicographically */
         if (oNChildPrev != NULL){
             if (strcmp(Path_getPathname(Node_getPath(oNChild)),
@@ -86,6 +94,14 @@ static boolean CheckerDT_treeCheck(Node_T oNNode) {
                 fprintf(stderr, "Nodes are not stored lexographically\n");
                 return FALSE;
             }
+
+            path = Node_getPath(Node_getParent(oNChild));
+            pathPrev = Node_getPath(Node_getParent(oNChildPrev));
+            if (!strcmp(Path_getPathname(path), Path_getPathname(pathPrev))){
+               fprintf(stderr, "Children at same level need to have same path length");
+               return FALSE;
+            }
+
         }
         
         /* check if there is another child of the same name */
