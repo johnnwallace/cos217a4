@@ -54,7 +54,6 @@ boolean CheckerDT_Node_isValid(Node_T oNNode) {
 static boolean CheckerDT_treeCheck(Node_T oNNode) {
    size_t ulIndex;
    size_t ulIndexB;
-   unsigned int sizeCheck;
 
    if(oNNode!= NULL) {
 
@@ -98,7 +97,7 @@ static boolean CheckerDT_treeCheck(Node_T oNNode) {
             path = Node_getPath(Node_getParent(oNChild));
             pathPrev = Node_getPath(Node_getParent(oNChildPrev));
             if (!strcmp(Path_getPathname(path), Path_getPathname(pathPrev))){
-               fprintf(stderr, "Children at same level need to have same path length\n");
+               fprintf(stderr, "Two children of the same generation must have the same parent\n");
                return FALSE;
             }
 
