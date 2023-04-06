@@ -62,8 +62,6 @@ static boolean CheckerDT_treeCheck(Node_T oNNode) {
       if(!CheckerDT_Node_isValid(oNNode))
          return FALSE;
 
-      sizeCheck = 1;
-
       /* Recur on every child of oNNode */
       for(ulIndex = 0; ulIndex < Node_getNumChildren(oNNode); ulIndex++)
       {
