@@ -95,7 +95,7 @@ static boolean CheckerDT_treeCheck(Node_T oNNode) {
             path = Node_getPath(Node_getParent(oNChild));
             pathPrev = Node_getPath(Node_getParent(oNChildPrev));
             if (!strcmp(Path_getPathname(path), Path_getPathname(pathPrev))){
-               fprintf(stderr, "Two children of the same generation must have the same parent\n");
+               fprintf(stderr, "The parent paths of two child nodes from the same parent must be equivalent\n");
                return FALSE;
             }
 
