@@ -80,10 +80,12 @@ static boolean CheckerDT_treeCheck(Node_T oNNode) {
         }
 
         /* make sure nodes are stored lexicographically */
-        if (strcmp(Path_getPathname(Node_getPath(oNChild)),
+        if (oNChildPrev != NULL){
+            if (strcmp(Path_getPathname(Node_getPath(oNChild)),
                    Path_getPathname(Node_getPath(oNChildPrev))) > 0) {
-            fprintf(stderr, "Nodes are not stored lexographically");
-            return FALSE;
+                fprintf(stderr, "Nodes are not stored lexographically");
+                return FALSE;
+            }
         }
         
         /* check if there is another child of the same name */
