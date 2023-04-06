@@ -80,8 +80,8 @@ static boolean CheckerDT_treeCheck(Node_T oNNode) {
         }
 
         /* make sure nodes are stored lexicographically */
-        if (strcmp(Path_getPathname(Node_getPath(oNChild))),
-                   Path_getPathname(Node_getPath(oNChildPrev)) > 0) {
+        if (strcmp(Path_getPathname(Node_getPath(oNChild)),
+                   Path_getPathname(Node_getPath(oNChildPrev)) > 0)) {
             fprintf(stderr, "Nodes are not stored lexographically");
             return FALSE;
         }
