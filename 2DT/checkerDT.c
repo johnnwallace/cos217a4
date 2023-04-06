@@ -66,13 +66,25 @@ static boolean CheckerDT_treeCheck(Node_T oNNode) {
       for(ulIndex = 0; ulIndex < Node_getNumChildren(oNNode); ulIndex++)
       {
         Node_T oNChild = NULL;
+        Node_T oNChildPrev = NULL;
+
         int iStatus = Node_getChild(oNNode, ulIndex, &oNChild);
+        if (ulIndex != 0)
+            Node_getChild(oNNode, ulIndex - 1, &oNChildB);
 
         if(iStatus != SUCCESS) {
-           fprintf(stderr, "getNumChildren claims more children than getChild returns\n");
+           fprintf(stderr, "getNumChildren claims more children 
+           than getChild returns\n");
            return FALSE;
         }
 
+        /* make sure nodes are stored lexicographically */
+        if (strcmp(Path_getPathname(Node_getPath(oNChild))),
+                   Path_getPathname(Node_getPath(oNChildPrev)) > 0) {
+            fprintf(stderr, "Nodes are not stored lexographically");
+            return FALSE;
+        }
+        
         /* check if there is another child of the same name */
         for(ulIndexB = 0;
             ulIndexB < Node_getNumChildren(oNNode);
@@ -88,7 +100,7 @@ static boolean CheckerDT_treeCheck(Node_T oNNode) {
 
             if(Node_compare(oNChild, oNChildB) == 0) {
                 fprintf(stderr, "More than one identical node at %s\n",
-                    Path_getPathname(Node_getPath(oNNode)));
+                    );
                 return FALSE;
             }
         }
