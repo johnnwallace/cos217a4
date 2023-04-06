@@ -83,7 +83,7 @@ static boolean CheckerDT_treeCheck(Node_T oNNode) {
         if (oNChildPrev != NULL){
             if (strcmp(Path_getPathname(Node_getPath(oNChild)),
                    Path_getPathname(Node_getPath(oNChildPrev))) < 0) {
-                fprintf(stderr, "Nodes are not stored lexographically");
+                fprintf(stderr, "Nodes are not stored lexographically\n");
                 return FALSE;
             }
         }
