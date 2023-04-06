@@ -98,7 +98,7 @@ static boolean CheckerDT_treeCheck(Node_T oNNode) {
             path = Node_getPath(Node_getParent(oNChild));
             pathPrev = Node_getPath(Node_getParent(oNChildPrev));
             if (!strcmp(Path_getPathname(path), Path_getPathname(pathPrev))){
-               fprintf(stderr, "Children at same level need to have same path length");
+               fprintf(stderr, "Children at same level need to have same path length\n");
                return FALSE;
             }
 
