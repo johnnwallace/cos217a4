@@ -67,6 +67,9 @@ static boolean CheckerDT_treeCheck(Node_T oNNode) {
       {
         Node_T oNChild = NULL;
         Node_T oNChildPrev = NULL;
+        Path_T path = NULL;
+        Path_T pathPrev = NULL;
+
 
         int iStatus = Node_getChild(oNNode, ulIndex, &oNChild);
         if (ulIndex != 0)
@@ -79,6 +82,8 @@ static boolean CheckerDT_treeCheck(Node_T oNNode) {
            return FALSE;
         }
 
+
+
         /* make sure nodes are stored lexicographically */
         if (oNChildPrev != NULL){
             if (strcmp(Path_getPathname(Node_getPath(oNChild)),
@@ -86,6 +91,14 @@ static boolean CheckerDT_treeCheck(Node_T oNNode) {
                 fprintf(stderr, "Nodes are not stored lexographically\n");
                 return FALSE;
             }
+
+            path = Node_getPath(Node_getParent(oNChild));
+            pathPrev = Node_getPath(Node_getParent(oNChildPrev));
+            if (!strcmp(Path_getPathname(path), Path_getPathname(pathPrev))){
+               fprintf(stderr, "The parent paths of two child nodes from the same parent must be equivalent\n");
+               return FALSE;
+            }
+
         }
         
         /* check if there is another child of the same name */
