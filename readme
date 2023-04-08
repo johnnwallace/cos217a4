@@ -148,7 +148,11 @@ sets the module to an uninitialized state, so DT_init() must be called
 before it can be used, which already sets ulCount to 0.
 
 
-3. 
+3. A critique for DT_preOrderTraversal is the name of the function
+arguments. The names n, d, and i are not indicative of their purpose.
+They are also not consistent with other functions, where the node input
+is called oNNode, and indices called ulIndex. Better names for
+DT_preOrderTraversal would be oNNode, oDArray, ulIndex. 
 
 
 
