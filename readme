@@ -132,6 +132,24 @@ the error manifests itself or is "noticed" by the client.
 What are your critiques of the given DT implementations, as
 specified in Step 2.5?
 
+1. One critique for the implementation of nodeDT is inconsistencies
+in paramter order for the various client-facing functions. In 
+Node_getChild and Node_hasChild, the parent node (Node_T oNParent) is 
+the first parameter, which makes sense since these functions are both 
+operations that rely upon the parent. However, Node_new takes the 
+pat (Path_T oPPath) as the first argument and the parent (Node_T
+oNParent) as the second argument. For consistency and ease of use,
+the parent node (Node_T oNParent) should also be the first parameter
+in Node_new().
+
+2. One critique of the implementation of DT_destroy() is that it is
+unnecessary to set ulCount to 0 on line 314 of dtGood.c. DT_destroy()
+sets the module to an uninitialized state, so DT_init() must be called
+before it can be used, which already sets ulCount to 0.
+
+
+3. 
+
 
 
 ------------------------------------------------------------------------
