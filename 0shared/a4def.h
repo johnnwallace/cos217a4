@@ -20,4 +20,9 @@ enum bool { FALSE, TRUE };
 /* Make enumeration "feel" more like a builtin type */
 typedef enum bool boolean;
 
+/* To distinguish nodes between files and directories */
+enum type { DIRECTORY, FILE };
+/* Make enumeration "feel" more like a builtin type */
+typedef enum type nodeType;
+
 #endif
