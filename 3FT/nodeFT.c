@@ -152,5 +152,87 @@ int Node_new(Path_T oPPath, nodeType type, Node_T oNParent,
 /* ------------------------------------------------------------------ */
 
 size_t Node_free(Node_T oNNode) {
-    
+    size_t ulIndex;
+    size_t ulCount = 0;
+
+    assert(oNNode != NULL);
+    assert(CheckerDT_Node_isValid(oNNode));
+
+    /* remove from parent's list */
+    if(oNNode->oNParent != NULL) {
+        if(DynArray_bsearch(
+                oNNode->oNParent->oDChildren,
+                oNNode, &ulIndex,
+                (int (*)(const void *, const void *)) Node_compare)
+            )
+            (void) DynArray_removeAt(oNNode->oNParent->oDChildren,
+                                    ulIndex);
+    }
+
+    /* recursively remove children */
+    while(DynArray_getLength(oNNode->oDChildren) != 0) {
+        ulCount += Node_free(DynArray_get(oNNode->oDChildren, 0));
+    }
+    DynArray_free(oNNode->oDChildren);
+
+    /* remove path */
+    Path_free(oNNode->oPPath);
+
+    /* remove contents if file */
+    free(oNNode -> pvContents);
+
+    /* finally, free the struct node */
+    free(oNNode);
+    ulCount++;
+    return ulCount;
 }
+
+Path_T Node_getPath(Node_T oNNode) {
+   assert(oNNode != NULL);
+
+   return oNNode->oPPath;
+}
+
+/* ------------------------------------------------------------------ */
+
+Path_T Node_getPath(Node_T oNNode) {
+   assert(oNNode != NULL);
+
+   return oNNode->oPPath;
+}
+
+/* ------------------------------------------------------------------ */
+
+boolean Node_hasChild(Node_T oNParent, Path_T oPPath,
+                         size_t *pulChildID); {
+    assert(oNParent != NULL);
+    assert(oPPath != NULL);
+    assert(pulChildID != NULL);
+
+    /* invariant */
+    if (oNParemnt -> type == FILE){
+        return FALSE;
+    }
+
+    /* *pulChildID is the index into oNParent->oDChildren */
+    return DynArray_bsearch(oNParent->oDChildren,
+            (char*) Path_getPathname(oPPath), pulChildID,
+            (int (*)(const void*,const void*)) Node_compareString);
+}
+
+/* ------------------------------------------------------------------ */
+
+/* Returns the number of children that oNParent has. */
+int Node_getNumChildren(Node_T oNParent, size_t *pulNum) {
+    assert(oNParent != NULL);
+
+    /* verify oNParent is a directory */
+    if (oNParent -> type == FILE){
+        return NOT_A_DIRECTORY;
+    }
+
+    *pulNum = DynArray_getLength(oNParent -> oDChildren);
+    return SUCCESS;
+}
+
+/* ------------------------------------------------------------------ */
