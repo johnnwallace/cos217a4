@@ -50,7 +50,7 @@ int main(void) {
     printf("%d", (int)testSize);
 
     printf("printing return val of hasChild on nodeA, shoudl be TRUE\n");
-    printf("%d", (int)Node_hasChild(nodeA, *pPathB, &ulIndex));
+    printf("%d", (int)Node_hasChild(nodeA, pathB, &ulIndex));
 
     return 0;
 }
