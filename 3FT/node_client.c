@@ -40,7 +40,7 @@ int main(void) {
     iStatus = Path_new(pPathB, &pathB);
     if(iStatus != SUCCESS)
         printf("new path error: %d\n", iStatus);
-    iStatus = Node_new(pathB, IS_DIRECTORY, NULL, &nodeB);
+    iStatus = Node_new(pathB, IS_DIRECTORY, nodeA, &nodeB);
     if(iStatus != SUCCESS)
         printf("new node error: %d\n", iStatus);
 
