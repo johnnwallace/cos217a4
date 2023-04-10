@@ -35,11 +35,11 @@ int main(void) {
     iStatus = Node_getNumChildren(nodeA, &testSize);
 
     printf("printing value stored from getNumChildren, should be 0\n");
-    printf(*testSize);
+    printf(testSize);
 
     iStatus = Path_new(pPathB, &pathB);
     if(iStatus != SUCCESS)
-        printf("%d", iStatus)
+        printf("%d", iStatus);
     iStatus = Node_new(pathB, IS_DIRECTORY, NULL, &nodeB);
     if(iStatus != SUCCESS)
         printf("%d", iStatus);
@@ -47,10 +47,10 @@ int main(void) {
     iStatus = Node_getNumChildren(nodeA, &testSize);
         
     printf("printing value stored from getNumChildren, should be 1\n");
-    printf(*testSize);
+    printf(testSize);
 
     printf("printing return val of hasChild on nodeA, shoudl be TRUE\n");
-    printf(Node_hasChild(nodeA, *pPathB, &ulIndex));
+    printf((int)Node_hasChild(nodeA, *pPathB, &ulIndex));
 
     return 0;
 }
