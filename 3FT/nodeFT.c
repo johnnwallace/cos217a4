@@ -274,7 +274,7 @@ int Node_getChild(Node_T oNParent, size_t ulChildID,
     assert(oNParent != NULL);
     assert(poNResult != NULL);
 
-    iStatus = Node_getNumChildren(oNParent, *iChildren);
+    iStatus = Node_getNumChildren(oNParent, &iChildren);
     if (iStatus != SUCCESS) {
         return iStatus;
     }
