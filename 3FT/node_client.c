@@ -10,6 +10,7 @@
 #include <string.h>
 #include "nodeFT.h"
 #include "path.h"
+#include "dynarray.h"
 
 /* Tests the Node implementation with an assortment of checks.
    Prints the status of the data structure along the way to stderr.
