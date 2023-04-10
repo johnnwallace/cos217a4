@@ -267,12 +267,20 @@ int Node_getNumChildren(Node_T oNParent, size_t *pulNum) {
 
 int Node_getChild(Node_T oNParent, size_t ulChildID,
                   Node_T *poNResult) {
+
+    int iStatus;
+    size_t iChildren;
     
     assert(oNParent != NULL);
     assert(poNResult != NULL);
 
+    iStatus = Node_getNumChildren(oNParent, *iChildren);
+    if (iStatus != SUCCESS) {
+        return iStatus;
+    }
+
     /* ulChildID is the index into oNParent->oDChildren */
-    if(ulChildID >= Node_getNumChildren(oNParent)) {
+    if(ulChildID >= iChildren) {
         *poNResult = NULL;
         return NO_SUCH_PATH;
     }
