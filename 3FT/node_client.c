@@ -27,10 +27,10 @@ int main(void) {
 
     iStatus = Path_new(pPathA, &pathA);
     if(iStatus != SUCCESS)
-        printf("%d\n", iStatus);
+        printf("new path error: %d\n", iStatus);
     iStatus = Node_new(pathA, IS_DIRECTORY, NULL, &nodeA);
     if(iStatus != SUCCESS)
-        printf("%d\n", iStatus);
+        printf("new node error: %d\n", iStatus);
 
     iStatus = Node_getNumChildren(nodeA, &testSize);
 
@@ -39,10 +39,10 @@ int main(void) {
 
     iStatus = Path_new(pPathB, &pathB);
     if(iStatus != SUCCESS)
-        printf("%d\n", iStatus);
+        printf("new path error: %d\n", iStatus);
     iStatus = Node_new(pathB, IS_DIRECTORY, NULL, &nodeB);
     if(iStatus != SUCCESS)
-        printf("%d\n", iStatus);
+        printf("new node error: %d\n", iStatus);
 
     iStatus = Node_getNumChildren(nodeA, &testSize);
         
