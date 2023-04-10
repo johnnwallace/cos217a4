@@ -53,7 +53,7 @@ int main(void) {
     printf("printing return val of hasChild on nodeA, shoudl be TRUE:\n");
     printf("%d\n", (int)Node_hasChild(nodeA, pathB, &ulIndex));
 
-    printf("size of nodeA dyn array %ld\n", DynArray_getLength(*nodeA -> oDChildren));
+    printf("size of nodeA dyn array %ld\n", DynArray_getLength((nodeA -> oDChildren)));
     printf("freeing %ld nodes", Node_free(nodeA));
 
     return 0;
