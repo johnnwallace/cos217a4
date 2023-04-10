@@ -1,0 +1,38 @@
+#--------------------------------------------------------------------
+# Makefile for Assignment 4
+# Invoke with the command:
+# 	make -f Makefile.sampleft
+# Authors: Mirabelle Weinbach and John Wallace
+#--------------------------------------------------------------------
+
+CC=gcc217
+
+all: ft
+node: node
+
+clean:
+	rm -f ft
+
+clobber: clean
+	rm -f ft_client.o *~
+
+node: nodeFT.o node_client.o nodeFT.o dynarray.o path.o
+	$(CC) nodeFT.o node_client.o nodeFT.o dynarray.o path.o -o node
+
+ft: ft.o ft_client.o nodeFT.o dynarray.o path.o
+	$(CC) ft.o ft_client.o nodeFT.o dynarray.o path.o -o ft
+
+ft_client.o: ft_client.c ft.h a4def.h
+	$(CC) -c ft_client.c
+
+nodeFT.o: nodeFT.c dynarray.h nodeFT.h
+	$(CC) -c nodeFT.c
+
+path.o: path.c path.h dynarray.h
+	$(CC) -c path.c
+	
+dynarray.o: dynarray.c 
+	$(CC) -c dynarray.c
+
+node_client.o: node_client.c nodeFT.h path.h
+	$(CC) -c node_client.c

@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "ft.h": "c",
+        "dynarray.h": "c"
+    }
+}
