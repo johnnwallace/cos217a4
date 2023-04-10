@@ -53,7 +53,7 @@ int main(void) {
     iStatus = Node_getChild(nodeA, 0, &testNode);
     if(iStatus != SUCCESS)
         printf("getChild error: %d\n", iStatus);
-    assert(Node_compare(nodeA, testNode) == 0);
+    assert(Node_compare(nodeB, testNode) == 0);
         
     printf("printing value stored from getNumChildren, should be 1:\n");
     printf("%d\n", (int)testSize);
