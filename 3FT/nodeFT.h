@@ -62,21 +62,21 @@ int Node_getNumChildren(Node_T oNParent, size_t *pulNum)
   Otherwise, sets *poNResult to NULL and returns status:
   * NO_SUCH_PATH if ulChildID is not a valid child for oNParent
 */
-int Node_getChild(Node_T oNParent, size_t ulChildID,
-                  Node_T *poNResult);
+/* int Node_getChild(Node_T oNParent, size_t ulChildID,
+                  Node_T *poNResult); */
 
 /*
   Returns a the parent node of oNNode.
   Returns NULL if oNNode is the root and thus has no parent.
 */
-Node_T Node_getParent(Node_T oNNode);
+/* Node_T Node_getParent(Node_T oNNode); */
 
 /*
   Compares oNFirst and oNSecond lexicographically based on their paths.
   Returns <0, 0, or >0 if onFirst is "less than", "equal to", or
   "greater than" oNSecond, respectively.
 */
-int Node_compare(Node_T oNFirst, Node_T oNSecond);
+/* int Node_compare(Node_T oNFirst, Node_T oNSecond); */
 
 /*
   Returns a string representation for oNNode, or NULL if
@@ -85,6 +85,6 @@ int Node_compare(Node_T oNFirst, Node_T oNSecond);
   Allocates memory for the returned string, which is then owned by
   the caller!
 */
-char *Node_toString(Node_T oNNode);
+/* char *Node_toString(Node_T oNNode); */
 
 #endif
