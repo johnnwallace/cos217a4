@@ -220,7 +220,7 @@ Path_T Node_getPath(Node_T oNNode) {
 
 
 boolean Node_hasChild(Node_T oNParent, Path_T oPPath,
-                         size_t *pulChildID); {
+                         size_t *pulChildID) {
     assert(oNParent != NULL);
     assert(oPPath != NULL);
     assert(pulChildID != NULL);
