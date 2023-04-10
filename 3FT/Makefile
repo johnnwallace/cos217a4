@@ -8,7 +8,6 @@
 CC=gcc217
 
 all: ft
-node: node
 
 clean:
 	rm -f ft
