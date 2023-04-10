@@ -9,7 +9,6 @@
 #include "dynarray.h"
 #include "nodeFT.h"
 
-
 /* A node in a FT */
 struct node {
     /* the object corresponding to the node's absolute path */
@@ -18,7 +17,7 @@ struct node {
     Node_T oNParent;
     /* the object containing links to this node's children */
     DynArray_T oDChildren;
-    /* the type of node - either DIRECTORY or FILE */
+    /* the type of node - either IS_DIRECTORY or IS_FILE */
     nodeType type;
     /* the contents of the file; null if node is a directory */
     void *pvContents;
@@ -37,7 +36,7 @@ static int Node_addChild(Node_T oNParent, Node_T oNChild,
     assert(oNParent != NULL);
     assert(oNChild != NULL);
 
-    if(oNParent -> type != DIRECTORY)
+    if(oNParent -> type != IS_DIRECTORY)
         return NOT_A_DIRECTORY;
 
     if(DynArray_addAt(oNParent->oDChildren, ulIndex, oNChild))
@@ -100,7 +99,7 @@ int Node_new(Path_T oPPath, nodeType type, Node_T oNParent,
                                                     oPParentPath);
 
         /* parent must be a directory */
-        if (oNParent -> type == FILE){
+        if (oNParent -> type == IS_FILE){
             Path_free(psNew->oPPath);
             free(psNew);
             *poNResult = NULL;
@@ -134,7 +133,7 @@ int Node_new(Path_T oPPath, nodeType type, Node_T oNParent,
     else {
         /* new node must be root and therefore must be directory*/
         /* can only create one "level" at a time */
-        if(oNParent -> type == FILE) {
+        if(oNParent -> type == IS_FILE) {
             Path_free(psNew->oPPath);
             free(psNew);
             *poNResult = NULL;
@@ -220,10 +219,6 @@ Path_T Node_getPath(Node_T oNNode) {
 /* ------------------------------------------------------------------ */
 
 
-
-/* ------------------------------------------------------------------ */
-
-
 boolean Node_hasChild(Node_T oNParent, Path_T oPPath,
                          size_t *pulChildID); {
     assert(oNParent != NULL);
@@ -231,7 +226,7 @@ boolean Node_hasChild(Node_T oNParent, Path_T oPPath,
     assert(pulChildID != NULL);
 
     /* invariant */
-    if (oNParent -> type == FILE){
+    if (oNParent -> type == IS_FILE){
         return FALSE;
     }
 
@@ -248,7 +243,7 @@ int Node_getNumChildren(Node_T oNParent, size_t *pulNum) {
     assert(oNParent != NULL);
 
     /* verify oNParent is a directory */
-    if (oNParent -> type == FILE){
+    if (oNParent -> type == IS_FILE){
         return NOT_A_DIRECTORY;
     }
 
