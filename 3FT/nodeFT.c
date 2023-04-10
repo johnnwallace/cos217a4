@@ -147,6 +147,16 @@ int Node_new(Path_T oPPath, nodeType type, Node_T oNParent,
     }
     psNew->oNParent = oNParent;
 
+    /* initialize the new node */
+    psNew->oDChildren = DynArray_new(0);
+    if(psNew->oDChildren == NULL) {
+        Path_free(psNew->oPPath);
+        free(psNew);
+        *poNResult = NULL;
+        return MEMORY_ERROR;
+    }
+
+    /* Link into parent's children list */
     if(oNParent != NULL) {
         iStatus = Node_addChild(oNParent, psNew, ulIndex);
         if (iStatus != SUCCESS) {
