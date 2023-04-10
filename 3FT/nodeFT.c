@@ -68,6 +68,8 @@ int Node_new(Path_T oPPath, nodeType type, Node_T oNParent,
     struct node *psNew;
     Path_T oPParentPath = NULL;
     Path_T oPNewPath = NULL;
+    int iStatus;
+    size_t ulIndex;
     
     assert(oPPath != NULL);
 
@@ -92,6 +94,7 @@ int Node_new(Path_T oPPath, nodeType type, Node_T oNParent,
     /* validate and set the new node's parent */
     if(oNParent != NULL) {
         size_t ulSharedDepth;
+        size_t ulParentDepth;
 
         oPParentPath = oNParent->oPPath;
         ulParentDepth = Path_getDepth(oPParentPath);
@@ -171,7 +174,6 @@ size_t Node_free(Node_T oNNode) {
     size_t ulCount = 0;
 
     assert(oNNode != NULL);
-    assert(CheckerDT_Node_isValid(oNNode));
 
     /* remove from parent's list */
     if(oNNode->oNParent != NULL) {
@@ -200,14 +202,6 @@ size_t Node_free(Node_T oNNode) {
     free(oNNode);
     ulCount++;
     return ulCount;
-}
-
-/* ------------------------------------------------------------------ */
-
-Path_T Node_getPath(Node_T oNNode) {
-   assert(oNNode != NULL);
-
-   return oNNode->oPPath;
 }
 
 /* ------------------------------------------------------------------ */
