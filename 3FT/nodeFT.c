@@ -48,6 +48,22 @@ static int Node_addChild(Node_T oNParent, Node_T oNChild,
 
 /* ------------------------------------------------------------------ */
 
+/*
+  Compares the string representation of oNfirst with a string
+  pcSecond representing a node's path.
+  Returns <0, 0, or >0 if oNFirst is "less than", "equal to", or
+  "greater than" pcSecond, respectively.
+*/
+static int Node_compareString(const Node_T oNFirst,
+                                 const char *pcSecond) {
+   assert(oNFirst != NULL);
+   assert(pcSecond != NULL);
+
+   return Path_compareString(oNFirst->oPPath, pcSecond);
+}
+
+/* ------------------------------------------------------------------ */
+
 int Node_new(Path_T oPPath, nodeType type, Node_T oNParent,
              Node_T *poNResult) {
     struct node *psNew;
@@ -203,6 +219,11 @@ Path_T Node_getPath(Node_T oNNode) {
 
 /* ------------------------------------------------------------------ */
 
+
+
+/* ------------------------------------------------------------------ */
+
+
 boolean Node_hasChild(Node_T oNParent, Path_T oPPath,
                          size_t *pulChildID); {
     assert(oNParent != NULL);
@@ -210,7 +231,7 @@ boolean Node_hasChild(Node_T oNParent, Path_T oPPath,
     assert(pulChildID != NULL);
 
     /* invariant */
-    if (oNParemnt -> type == FILE){
+    if (oNParent -> type == FILE){
         return FALSE;
     }
 
