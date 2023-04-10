@@ -76,7 +76,7 @@ int Node_getNumChildren(Node_T oNParent, size_t *pulNum);
   Returns <0, 0, or >0 if onFirst is "less than", "equal to", or
   "greater than" oNSecond, respectively.
 */
-/* int Node_compare(Node_T oNFirst, Node_T oNSecond); */
+int Node_compare(Node_T oNFirst, Node_T oNSecond);
 
 /*
   Returns a string representation for oNNode, or NULL if

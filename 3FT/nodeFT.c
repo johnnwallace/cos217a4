@@ -53,6 +53,7 @@ static int Node_addChild(Node_T oNParent, Node_T oNChild,
   Returns <0, 0, or >0 if oNFirst is "less than", "equal to", or
   "greater than" pcSecond, respectively.
 */
+
 static int Node_compareString(const Node_T oNFirst,
                                  const char *pcSecond) {
    assert(oNFirst != NULL);
@@ -168,6 +169,17 @@ int Node_new(Path_T oPPath, nodeType type, Node_T oNParent,
 }
 
 /* ------------------------------------------------------------------ */
+
+
+int Node_compare(Node_T oNFirst, Node_T oNSecond) {
+   assert(oNFirst != NULL);
+   assert(oNSecond != NULL);
+
+   return Path_comparePath(oNFirst->oPPath, oNSecond->oPPath);
+}
+
+/* ------------------------------------------------------------------ */
+
 
 size_t Node_free(Node_T oNNode) {
     size_t ulIndex;
