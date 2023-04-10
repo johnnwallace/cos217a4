@@ -52,5 +52,7 @@ int main(void) {
     printf("printing return val of hasChild on nodeA, shoudl be TRUE:\n");
     printf("%d\n", (int)Node_hasChild(nodeA, pathB, &ulIndex));
 
+    free(nodeA);
+
     return 0;
 }
