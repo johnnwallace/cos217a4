@@ -22,8 +22,8 @@ int main(void) {
     char *pPathA = "a";
     char *pPathB = "a/b";
     size_t testSize;
+    size_t ulIndex;
     int iStatus;
-    int ulIndex;
 
     iStatus = Path_new(pPathA, &pathA);
     if(iStatus != SUCCESS)
