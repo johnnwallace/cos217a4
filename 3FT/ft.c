@@ -6,10 +6,13 @@
 
 #include <stddef.h>
 #include "ft.h"
+#include "nodeFT.h"
 
 
 
-int FT_insertDir(const char *pcPath){}
+int FT_insertDir(const char *pcPath){
+
+}
 
 
 boolean FT_containsDir(const char *pcPath){}
