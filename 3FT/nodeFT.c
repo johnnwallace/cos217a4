@@ -202,6 +202,8 @@ size_t Node_free(Node_T oNNode) {
     return ulCount;
 }
 
+/* ------------------------------------------------------------------ */
+
 Path_T Node_getPath(Node_T oNNode) {
    assert(oNNode != NULL);
 
