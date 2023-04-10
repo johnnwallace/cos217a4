@@ -23,7 +23,7 @@ node: nodeFT.o node_client.o dynarray.o path.o
 ft: ft.o ft_client.o nodeFT.o dynarray.o path.o
 	$(CC) ft.o ft_client.o nodeFT.o dynarray.o path.o -o ft
 
-ft_client.o: ft_client.c ft.h a4def.h
+ft_client.o: ft_client.c ft.h dynarray.h a4def.h
 	$(CC) -c ft_client.c
 
 node_client.o: node_client.c nodeFT.h path.h
