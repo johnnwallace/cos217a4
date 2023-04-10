@@ -52,7 +52,7 @@ int main(void) {
     printf("printing return val of hasChild on nodeA, shoudl be TRUE:\n");
     printf("%d\n", (int)Node_hasChild(nodeA, pathB, &ulIndex));
 
-    printf("freeing %d nodes", Node_free(nodeA));
+    printf("freeing %ld nodes", Node_free(nodeA));
 
     return 0;
 }
