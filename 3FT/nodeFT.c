@@ -137,12 +137,6 @@ int Node_new(Path_T oPPath, nodeType type, Node_T oNParent,
     else {
         /* new node must be root and therefore must be directory*/
         /* can only create one "level" at a time */
-        if(oNParent -> type == IS_FILE) {
-            Path_free(psNew->oPPath);
-            free(psNew);
-            *poNResult = NULL;
-            return NOT_A_DIRECTORY;
-        }
 
         if(Path_getDepth(psNew->oPPath) != 1) {
             Path_free(psNew->oPPath);
