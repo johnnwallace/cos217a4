@@ -264,3 +264,33 @@ int Node_getNumChildren(Node_T oNParent, size_t *pulNum) {
 }
 
 /* ------------------------------------------------------------------ */
+
+int Node_getChild(Node_T oNParent, size_t ulChildID,
+                  Node_T *poNResult) {
+    
+    assert(oNParent != NULL);
+    assert(poNResult != NULL);
+
+    /* ulChildID is the index into oNParent->oDChildren */
+    if(ulChildID >= Node_getNumChildren(oNParent)) {
+        *poNResult = NULL;
+        return NO_SUCH_PATH;
+    }
+    else {
+        *poNResult = DynArray_get(oNParent->oDChildren, ulChildID);
+        return SUCCESS;
+    }
+}
+
+
+/* ------------------------------------------------------------------ */
+
+Node_T Node_getParent(Node_T oNNode) {
+   assert(oNNode != NULL);
+
+   return oNNode->oNParent;
+}
+
+/* ------------------------------------------------------------------ */
+
+

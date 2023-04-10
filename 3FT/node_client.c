@@ -20,6 +20,7 @@ int main(void) {
     Path_T pathB;
     Node_T nodeA;
     Node_T nodeB;
+    Node_T testNode;
     char *pPathA = "a";
     char *pPathB = "a/b";
     size_t testSize;
@@ -46,6 +47,13 @@ int main(void) {
         printf("new node error: %d\n", iStatus);
 
     iStatus = Node_getNumChildren(nodeA, &testSize);
+
+    assert(Node_compare(nodeA, Node_getParent(nodeB)) == 0);
+
+    iStatus = Node_getChild(nodeA, 0, &testNode);
+    if(iStatus != SUCCESS)
+        printf("getChild error: %d\n", iStatus);
+    assert(Node_compare(nodeA, testNode) == 0);
         
     printf("printing value stored from getNumChildren, should be 1:\n");
     printf("%d\n", (int)testSize);
@@ -53,7 +61,7 @@ int main(void) {
     printf("printing return val of hasChild on nodeA, shoudl be TRUE:\n");
     printf("%d\n", (int)Node_hasChild(nodeA, pathB, &ulIndex));
 
-    printf("size of nodeA dyn array %ld\n", DynArray_getLength((nodeA -> oDChildren)));
+    printf("size of nodeA dyn array %ld\n", DynArray_getLength(nodeA -> oDChildren));
     printf("freeing %ld nodes", Node_free(nodeA));
 
     return 0;
