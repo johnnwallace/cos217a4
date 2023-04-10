@@ -27,30 +27,30 @@ int main(void) {
 
     iStatus = Path_new(pPathA, &pathA);
     if(iStatus != SUCCESS)
-        printf("%d", iStatus);
+        printf("%d\n", iStatus);
     iStatus = Node_new(pathA, IS_DIRECTORY, NULL, &nodeA);
     if(iStatus != SUCCESS)
-        printf("%d", iStatus);
+        printf("%d\n", iStatus);
 
     iStatus = Node_getNumChildren(nodeA, &testSize);
 
-    printf("printing value stored from getNumChildren, should be 0\n");
-    printf("%d", (int)testSize);
+    printf("printing value stored from getNumChildren, should be 0:\n");
+    printf("%d\n", (int)testSize);
 
     iStatus = Path_new(pPathB, &pathB);
     if(iStatus != SUCCESS)
-        printf("%d", iStatus);
+        printf("%d\n", iStatus);
     iStatus = Node_new(pathB, IS_DIRECTORY, NULL, &nodeB);
     if(iStatus != SUCCESS)
-        printf("%d", iStatus);
+        printf("%d\n", iStatus);
 
     iStatus = Node_getNumChildren(nodeA, &testSize);
         
-    printf("printing value stored from getNumChildren, should be 1\n");
-    printf("%d", (int)testSize);
+    printf("printing value stored from getNumChildren, should be 1:\n");
+    printf("%d\n", (int)testSize);
 
-    printf("printing return val of hasChild on nodeA, shoudl be TRUE\n");
-    printf("%d", (int)Node_hasChild(nodeA, pathB, &ulIndex));
+    printf("printing return val of hasChild on nodeA, shoudl be TRUE:\n");
+    printf("%d\n", (int)Node_hasChild(nodeA, pathB, &ulIndex));
 
     return 0;
 }
