@@ -15,10 +15,10 @@
    Prints the status of the data structure along the way to stderr.
    Returns 0. */
 int main(void) {
-    Path_T *pathA;
-    Path_T *pathB;
-    Node_T *nodeA;
-    Node_T *nodeB;
+    Path_T pathA;
+    Path_T pathB;
+    Node_T nodeA;
+    Node_T nodeB;
     char *pPathA = "a";
     char *pPathB = "a/b";
     size_t *testSize;
@@ -26,7 +26,7 @@ int main(void) {
 
     iStatus = Path_new(pPathA, pathA);
     if(iStatus != SUCCESS)
-        printf("%d", iStatus)
+        printf("%d", iStatus);
     iStatus = Node_new(pathA, DIRECTORY, NULL, nodeA);
     if(iStatus != SUCCESS)
         printf("%d", iStatus);
