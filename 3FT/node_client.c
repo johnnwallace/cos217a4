@@ -62,5 +62,8 @@ int main(void) {
     printf("%d\n", (int)Node_hasChild(nodeA, pathB, &ulIndex));
     printf("freeing %ld nodes\n", Node_free(nodeA));
 
+    Path_free(pathA);
+    Path_free(pathB);
+
     return 0;
 }
