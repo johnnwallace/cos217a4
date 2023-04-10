@@ -24,10 +24,10 @@ int main(void) {
     size_t *testSize;
     int iStatus;
 
-    iStatus = Path_new(pPathA, pathA);
+    iStatus = Path_new(pPathA, &pathA);
     if(iStatus != SUCCESS)
         printf("%d", iStatus);
-    iStatus = Node_new(pathA, DIRECTORY, NULL, nodeA);
+    iStatus = Node_new(pathA, IS_DIRECTORY, NULL, nodeA);
     if(iStatus != SUCCESS)
         printf("%d", iStatus);
 
@@ -39,7 +39,7 @@ int main(void) {
     iStatus = Path_new(pPathB, pathB);
     if(iStatus != SUCCESS)
         printf("%d", iStatus)
-    iStatus = Node_new(pathB, DIRECTORY, NULL, nodeB);
+    iStatus = Node_new(pathB, IS_DIRECTORY, NULL, nodeB);
     if(iStatus != SUCCESS)
         printf("%d", iStatus);
 
@@ -49,7 +49,7 @@ int main(void) {
     printf(*testSize);
 
     printf("printing return val of hasChild on nodeA, shoudl be TRUE\n");
-    printf(Node_hasChild(nodeA));
+    printf(Node_hasChild(nodeA), *pPathB, );
 
     return 0;
 }
