@@ -26,6 +26,9 @@ ft: ft.o ft_client.o nodeFT.o dynarray.o path.o
 ft_client.o: ft_client.c ft.h a4def.h
 	$(CC) -c ft_client.c
 
+node_client.o: node_client.c nodeFT.h path.h
+	$(CC) -c node_client.c
+	
 nodeFT.o: nodeFT.c dynarray.h nodeFT.h
 	$(CC) -c nodeFT.c
 
@@ -35,5 +38,4 @@ path.o: path.c path.h dynarray.h
 dynarray.o: dynarray.c 
 	$(CC) -c dynarray.c
 
-node_client.o: node_client.c nodeFT.h path.h
-	$(CC) -c node_client.c
+
