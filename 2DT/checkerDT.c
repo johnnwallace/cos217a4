@@ -39,6 +39,9 @@ boolean CheckerDT_Node_isValid(Node_T oNNode) {
       }
    }
 
+    /* check that dynarray is the right length */
+
+
    return TRUE;
 }
 
@@ -69,7 +72,8 @@ static boolean CheckerDT_treeCheck(Node_T oNNode) {
          Node_T oNChild = NULL;
          Node_T oNChildPrev = NULL;
 
-
+        /* check that two consecutive child nodes have the same parent
+        */
          int iStatus = Node_getChild(oNNode, ulIndex, &oNChild);
          if (ulIndex != 0) {
             Node_getChild(oNNode, ulIndex - 1, &oNChildPrev);
@@ -77,6 +81,20 @@ static boolean CheckerDT_treeCheck(Node_T oNNode) {
                             Node_getParent(oNChildPrev)) != 0) {
                 fprintf(stderr,
                 "two consecutive child nodes must have the same parent\n"
+                );
+                return FALSE;
+            }
+         }
+
+
+        /* check that two consecutive child nodes have the same parent*/
+         int iStatus = Node_getChild(oNNode, ulIndex, &oNChild);
+         if (ulIndex != 0) {
+            Node_getChild(oNNode, ulIndex - 1, &oNChildPrev);
+            if(strcmp(Node_toString(Node_getParent(oNChild)),
+                            Node_toString(Node_getParent(oNChildPrev))) != 0) {
+                fprintf(stderr,
+                "problem with string\n"
                 );
                 return FALSE;
             }
