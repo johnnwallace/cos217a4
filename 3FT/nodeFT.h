@@ -98,7 +98,7 @@ int Node_insertFileContents(Node_T oNNode, void *pvContents, size_t
 ulLength);
 
 /*  Return a pointer to the contents of oNNode.*/
-void *Node_getContents(Node_T oNNode)
+void *Node_getContents(Node_T oNNode);
 
 /*  Return the size in bytes of oNNode's contents.*/
 size_t Node_getSize(Node_T oNNode);
