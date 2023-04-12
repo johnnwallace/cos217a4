@@ -69,12 +69,13 @@ static boolean CheckerDT_treeCheck(Node_T oNNode, size_t ulCount) {
 
          Node_T oNChild = NULL;
          Node_T oNChildPrev = NULL;
+         int iStatus;
 
         ulCheck++;
 
         /* check that two consecutive child nodes have the same parent
         */
-         int iStatus = Node_getChild(oNNode, ulIndex, &oNChild);
+         iStatus = Node_getChild(oNNode, ulIndex, &oNChild);
          if (ulIndex != 0) {
             Node_getChild(oNNode, ulIndex - 1, &oNChildPrev);
             if(Node_compare(Node_getParent(oNChild),
