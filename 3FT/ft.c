@@ -432,7 +432,7 @@ int FT_insertFile(const char *pcPath, void *pvContents,
     ulDepth = Path_getDepth(oPPath);
     if(oNCurr == NULL) { /* attempts to insert file as root */
         ulIndex = 1;
-        return BAD_PATH;
+        return CONFLICTING_PATH;
     }
     else {
         ulIndex = Path_getDepth(Node_getPath(oNCurr))+1;
