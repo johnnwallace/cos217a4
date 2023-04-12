@@ -45,13 +45,15 @@ boolean CheckerDT_Node_isValid(Node_T oNNode) {
 /*
    Performs a pre-order traversal of the tree rooted at oNNode.
    Returns FALSE if a broken invariant is found and
-   returns TRUE otherwise.
+   returns TRUE otherwise. Calculates total number of nodes traversed
+   stored at *ulCumulative.
+   
 
    You may want to change this function's return type or
    parameter list to facilitate constructing your checks.
    If you do, you should update this function comment.
 */
-static boolean CheckerDT_treeCheck(Node_T oNNode, size_t ulCount, size_t *ulCumulative) {
+static boolean CheckerDT_treeCheck(Node_T oNNode, size_t *ulCumulative) {
    size_t ulIndex;
    size_t ulIndexB;
 
@@ -120,7 +122,8 @@ static boolean CheckerDT_treeCheck(Node_T oNNode, size_t ulCount, size_t *ulCumu
                 /* DO WE NEED TO CHECK iStatus??????? */
 
                 if(Node_compare(oNChild, oNChildB) == 0) {
-                    fprintf(stderr, "More than one identical node at %s\n",
+                    fprintf(stderr,
+                            "More than one identical node at %s\n",
                             Path_getPathname(Node_getPath(oNNode)));
                     return FALSE;
                 }
@@ -143,20 +146,22 @@ boolean CheckerDT_isValid(boolean bIsInitialized, Node_T oNRoot,
     size_t ulCheck = 0;
     boolean result;
 
-   /* Sample check on a top-level data structure invariant:
-      if the DT is not initialized, its count should be 0. */
-   if(!bIsInitialized)
-      if(ulCount != 0) {
-         fprintf(stderr, "Not initialized, but count is not 0\n");
-         return FALSE;
-      }
+    /* Sample check on a top-level data structure invariant:
+        if the DT is not initialized, its count should be 0. */
+    if(!bIsInitialized)
+        if(ulCount != 0) {
+            fprintf(stderr, "Not initialized, but count is not 0\n");
+            return FALSE;
+        }
 
-   /* Now checks invariants recursively at each node from the root. */
-   result =  CheckerDT_treeCheck(oNRoot, ulCount, &ulCheck);
+    /* Now checks invariants recursively at each node from the root. */
+    result =  CheckerDT_treeCheck(oNRoot, &ulCheck);
 
     if (ulCheck != ulCount){
-         fprintf(stderr, "discrepancy in number of nodes in tree: %lu vs. %lu \n", ulCheck, ulCount);
-         return FALSE;
+        fprintf(stderr, "discrepancy in actual vs reported");
+        fprintf(stderr, "number of nodes in tree: %lu vs. %lu \n",
+                ulCheck, ulCount);
+        return FALSE;
     }
 
     return result;
