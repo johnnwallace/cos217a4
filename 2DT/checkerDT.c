@@ -65,22 +65,31 @@ static boolean CheckerDT_treeCheck(Node_T oNNode) {
       /* Recur on every child of oNNode */
       for(ulIndex = 0; ulIndex < Node_getNumChildren(oNNode); ulIndex++)
       {
-        Node_T oNChild = NULL;
-        Node_T oNChildPrev = NULL;
-        Path_T path = NULL;
-        Path_T pathPrev = NULL;
+
+         Node_T oNChild = NULL;
+         Node_T oNChildPrev = NULL;
 
 
-        int iStatus = Node_getChild(oNNode, ulIndex, &oNChild);
-        if (ulIndex != 0)
+         int iStatus = Node_getChild(oNNode, ulIndex, &oNChild);
+         if (ulIndex != 0) {
             Node_getChild(oNNode, ulIndex - 1, &oNChildPrev);
+            if(Node_compare(Node_getParent(oNChild),
+                            Node_getParent(oNChildPrev)) != 0) {
+                fprintf(stderr,
+                "two consecutive child nodes must have the same parent\n"
+                );
+                return FALSE;
+            }
+         }
+            
 
-        if(iStatus != SUCCESS) {
-           fprintf(stderr,
-           "getNumChildren claims more children than getChild returns\n"
-           );
-           return FALSE;
-        }
+         if(iStatus != SUCCESS) {
+            fprintf(stderr,
+            "getNumChildren claims more children than getChild returns\n"
+            );
+            return FALSE;
+         
+      }
 
 
 
