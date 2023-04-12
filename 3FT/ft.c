@@ -59,6 +59,7 @@ static int FT_traversePath(Path_T oPPath, Node_T *poNFurthest) {
     assert(oPPath != NULL);
     assert(poNFurthest != NULL);
 
+
     /* root is NULL -> won't find anything */
     if(oNRoot == NULL) {
         *poNFurthest = NULL;
@@ -349,6 +350,9 @@ boolean FT_containsDir(const char *pcPath){
     Node_T oNFound = NULL;
 
     assert(pcPath != NULL);
+
+    if (!bIsInitialized)
+        return FALSE;
 
     iStatus = FT_findNode(pcPath, &oNFound);
 
