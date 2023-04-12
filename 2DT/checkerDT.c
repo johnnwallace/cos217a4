@@ -131,7 +131,7 @@ static boolean CheckerDT_treeCheck(Node_T oNNode, size_t ulCount) {
       }
 
       if (ulCheck != ulCount){
-         fprintf(stderr, "discrepancy in number of nodes in tree \n");
+         fprintf(stderr, "discrepancy in number of nodes in tree: %ul vs. %ul \n", ulCheck, ulCount);
          return FALSE;
       }
    }
