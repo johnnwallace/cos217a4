@@ -575,7 +575,7 @@ void *FT_replaceFileContents(const char *pcPath, void *pvNewContents,
 
     if (iStatus == SUCCESS)
         return pvOldContents;
-    return null;
+    return NULL;
 }
 
 /* ------------------------------------------------------------------ */
