@@ -249,7 +249,6 @@ boolean Node_hasChild(Node_T oNParent, Path_T oPPath,
 
 /* ------------------------------------------------------------------ */
 
-/* Returns the number of children that oNParent has. */
 int Node_getNumChildren(Node_T oNParent, size_t *pulNum) {
     assert(oNParent != NULL);
 

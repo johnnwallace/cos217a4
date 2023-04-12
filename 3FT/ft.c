@@ -186,10 +186,40 @@ static int FT_traversePath(Path_T oPPath, Node_T *poNFurthest) {
 /*
   Performs a pre-order traversal of the tree rooted at oNNode,
   inserting each payload to DynArray_T oDArray beginning at index
-  ulIndex. Returns the next unused index in d after the insertion(s).
+  ulIndex. Returns the next unused index in oDArray after the
+  insertion(s).
 */
-static size_t DT_preOrderTraversal(Node_T oNNode, DynArray_T d, size_t i) {
+static size_t FT_preOrderTraversal(Node_T oNNode,
+                                   DynArray_T oDArray, size_t ulIndex) {
+    size_t count;
 
+    assert(oDArray != NULL);
+
+    if(oNNode != NULL) {
+        size_t ulChildren;
+        
+        /* set first free index to be given node */
+        (void) DynArray_set(oDArray, ulIndex, oNNode);
+        ulIndex++
+
+        if (Node_getNumChildren(oNNode, &ulChildren) == NOT_A_DIRECTORY)
+        {
+            return ulIndex;
+        }
+        
+        for(count = 0; count < ulChildren; count++) {
+            int iStatus;
+
+            Node_T oNChild = NULL;
+            iStatus = Node_getChild(oNNode, count, &oNChild);
+
+            assert(iStatus == SUCCESS);
+
+            ulIndex = DT_preOrderTraversal(oNChild, oDArray, ulIndex);
+        }
+    }
+
+    return ulIndex;
 }
 
 /*
@@ -197,7 +227,7 @@ static size_t DT_preOrderTraversal(Node_T oNNode, DynArray_T d, size_t i) {
   to accumulate a string length, rather than returning the length of
   oNNode's path, and also always adds one addition byte to the sum.
 */
-static void DT_strlenAccumulate(Node_T oNNode, size_t *pulAcc) {
+static void FT_strlenAccumulate(Node_T oNNode, size_t *pulAcc) {
 
 }
 
@@ -206,7 +236,7 @@ static void DT_strlenAccumulate(Node_T oNNode, size_t *pulAcc) {
   order, appending oNNode's path onto pcAcc, and also always adds one
   newline at the end of the concatenated string.
 */
-static void DT_strcatAccumulate(Node_T oNNode, char *pcAcc) {
+static void FT_strcatAccumulate(Node_T oNNode, char *pcAcc) {
 
 }
 
