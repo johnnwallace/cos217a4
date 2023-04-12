@@ -107,7 +107,7 @@ static int FT_traversePath(Path_T oPPath, Node_T *poNFurthest) {
             far as we can go */
 
             /* check if path argument has a file ancestor */
-            if((i != ulDepth) && (oNCurr -> type == IS_FILE)) {
+            if((i != ulDepth) && (Node_getType(oNCurr) == IS_FILE)) {
                 Path_free(oPPrefix);
                 *poNFurthest = NULL;
                 return BAD_PATH;
@@ -272,11 +272,47 @@ int FT_insertDir(const char *pcPath){
 
 /* ------------------------------------------------------------------ */
 
-boolean FT_containsDir(const char *pcPath){}
+boolean FT_containsDir(const char *pcPath){
+
+    int iStatus;
+    Node_T oNFound = NULL;
+
+    assert(pcPath != NULL);
+
+    iStatus = FT_findNode(pcPath, &oNFound);
+    return (boolean) (iStatus == SUCCESS);
+}
 
 /* ------------------------------------------------------------------ */
 
-int FT_rmDir(const char *pcPath){}
+int FT_rmDir(const char *pcPath){
+
+    int iStatus;
+    Node_T oNFound = NULL;
+
+    assert(pcPath != NULL);
+   
+    iStatus = FT_findNode(pcPath, &oNFound);
+
+    if(iStatus != SUCCESS){
+        if (oNFound !=NULL){
+            if (Node_getType(oNFound) == IS_FILE)
+                return NOT_A_DIRECTORY;
+        }
+        else {
+            return iStatus;
+        }
+    }
+        
+
+    ulCount -= Node_free(oNFound);
+    if(ulCount == 0)
+        oNRoot = NULL;
+
+    assert(CheckerDT_isValid(bIsInitialized, oNRoot, ulCount));
+    return SUCCESS;
+
+}
 
 /* ------------------------------------------------------------------ */
 
