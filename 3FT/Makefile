@@ -16,6 +16,7 @@ clean:
 clobber: clean
 	rm -f ft_client.o *~
 	rm -f node_client.o *~
+	rm -f *.o *~
 
 node: nodeFT.o node_client.o dynarray.o path.o
 	$(CC) nodeFT.o node_client.o dynarray.o path.o -o node
