@@ -154,11 +154,13 @@ They are also not consistent with other functions, where the node input
 is called oNNode, and indices called ulIndex. Better names for
 DT_preOrderTraversal would be oNNode, oDArray, ulIndex. 
 
-4. In nodeDTGood.c, the function comment for int Node_new() is in the implementation and the interface. This violates standard practice since
-it is a non-static method; we expect the function comment to be only
-in the interface (so the client knows how to use the function) - as the
-programmer, we (ideally) know how the function works and what it should
-return so this comment does not need to be duplicated in the .c file.
+4. In nodeDTGood.c, the function header comment for int Node_new() is in
+the implementation and the interface. This violates standard practice 
+since it is a non-static method; we expect the function comment to be 
+only in the interface (so the client knows how to use the function) - as
+the programmer, we (ideally) know how the function works and what it 
+should return so this comment does not need to be duplicated in the .c 
+file.
 
 
 
