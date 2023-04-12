@@ -216,7 +216,7 @@ static size_t FT_preOrderTraversal(Node_T oNNode,
 
             assert(iStatus == SUCCESS);
 
-            ulIndex = DT_preOrderTraversal(oNChild, oDArray, ulIndex);
+            ulIndex = FT_preOrderTraversal(oNChild, oDArray, ulIndex);
         }
     }
 
@@ -336,9 +336,9 @@ int FT_insertDir(const char *pcPath){
         if(oNRoot == NULL)
             oNRoot = oNFirstNew;
         ulCount += ulNewNodes;
-
-        return SUCCESS;
     }
+
+    return SUCCESS;
 }
 
 /* ------------------------------------------------------------------ */
@@ -488,8 +488,9 @@ int FT_insertFile(const char *pcPath, void *pvContents,
             oNRoot = oNFirstNew;
         ulCount += ulNewNodes;
 
-        return SUCCESS;
     }
+    
+    return SUCCESS;
 }
 
 /* ------------------------------------------------------------------ */
