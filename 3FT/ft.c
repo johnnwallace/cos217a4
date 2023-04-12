@@ -332,12 +332,13 @@ int FT_insertDir(const char *pcPath){
             oNFirstNew = oNCurr;
         ulIndex++;
 
-        Path_free(oPPath);
-        /* update FT state variables to reflect insertion */
-        if(oNRoot == NULL)
-            oNRoot = oNFirstNew;
-        ulCount += ulNewNodes;
     }
+
+    Path_free(oPPath);
+    /* update FT state variables to reflect insertion */
+    if(oNRoot == NULL)
+        oNRoot = oNFirstNew;
+    ulCount += ulNewNodes;
 
     return SUCCESS;
 }
@@ -485,14 +486,13 @@ int FT_insertFile(const char *pcPath, void *pvContents,
         if(oNFirstNew == NULL)
             oNFirstNew = oNCurr;
         ulIndex++;
-
-        Path_free(oPPath);
-        /* update FT state variables to reflect insertion */
-        if(oNRoot == NULL)
-            oNRoot = oNFirstNew;
-        ulCount += ulNewNodes;
-
     }
+
+    Path_free(oPPath);
+    /* update FT state variables to reflect insertion */
+    if(oNRoot == NULL)
+        oNRoot = oNFirstNew;
+    ulCount += ulNewNodes;
     
     return SUCCESS;
 }
