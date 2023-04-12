@@ -85,6 +85,6 @@ int Node_compare(Node_T oNFirst, Node_T oNSecond);
   Allocates memory for the returned string, which is then owned by
   the caller!
 */
-/* char *Node_toString(Node_T oNNode); */
+char *Node_toString(Node_T oNNode);
 
 #endif

@@ -5,7 +5,7 @@
 # Authors: Mirabelle Weinbach and John Wallace
 #--------------------------------------------------------------------
 
-CC=gcc217m -g
+CC=gcc217 -g
 
 all: ft
 

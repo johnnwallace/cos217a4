@@ -301,4 +301,14 @@ Node_T Node_getParent(Node_T oNNode) {
 
 /* ------------------------------------------------------------------ */
 
+char *Node_toString(Node_T oNNode) {
+   char *copyPath;
 
+   assert(oNNode != NULL);
+
+   copyPath = malloc(Path_getStrLength(Node_getPath(oNNode))+1);
+   if(copyPath == NULL)
+      return NULL;
+   else
+      return strcpy(copyPath, Path_getPathname(Node_getPath(oNNode)));
+}
