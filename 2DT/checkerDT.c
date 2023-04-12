@@ -126,7 +126,7 @@ static boolean CheckerDT_treeCheck(Node_T oNNode, size_t *ulCumulative) {
 
         /* if recurring down one subtree results in a failed check
         farther down, passes the failure back up immediately */
-        if(!CheckerDT_treeCheck(oNChild, ulCount, ulCumulative))
+        if(!CheckerDT_treeCheck(oNChild, ulCumulative))
             return FALSE;
         }
 
