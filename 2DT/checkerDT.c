@@ -55,89 +55,92 @@ static boolean CheckerDT_treeCheck(Node_T oNNode, size_t ulCount, size_t *ulCumu
    size_t ulIndex;
    size_t ulIndexB;
 
-   if(oNNode!= NULL) {
+    if(oNNode!= NULL) {
 
-      /* Sample check on each node: node must be valid */
-      /* If not, pass that failure back up immediately */
-      if(!CheckerDT_Node_isValid(oNNode))
-         return FALSE;
+        /* Sample check on each node: node must be valid */
+        /* If not, pass that failure back up immediately */
+        if(!CheckerDT_Node_isValid(oNNode))
+            return FALSE;
+
+        if(Path_getDepth(onNode) == 1){
+            *ulCumulative = 1;
+        }
 
         *ulCumulative += Node_getNumChildren(oNNode);
 
-      /* Recur on every child of oNNode */
-      for(ulIndex = 0; ulIndex < Node_getNumChildren(oNNode); ulIndex++)
-      {
+        /* Recur on every child of oNNode */
+        for(ulIndex = 0; ulIndex < Node_getNumChildren(oNNode); ulIndex++)
+        {
 
-         Node_T oNChild = NULL;
-         Node_T oNChildPrev = NULL;
-         int iStatus;
+            Node_T oNChild = NULL;
+            Node_T oNChildPrev = NULL;
+            int iStatus;
 
-        /* check that two consecutive child nodes have the same parent
-        */
-         iStatus = Node_getChild(oNNode, ulIndex, &oNChild);
-         if (ulIndex != 0) {
-            Node_getChild(oNNode, ulIndex - 1, &oNChildPrev);
-            if(Node_compare(Node_getParent(oNChild),
-                            Node_getParent(oNChildPrev)) != 0) {
+            /* check that two consecutive child nodes have the same parent
+            */
+            iStatus = Node_getChild(oNNode, ulIndex, &oNChild);
+            if (ulIndex != 0) {
+                Node_getChild(oNNode, ulIndex - 1, &oNChildPrev);
+                if(Node_compare(Node_getParent(oNChild),
+                                Node_getParent(oNChildPrev)) != 0) {
+                    fprintf(stderr,
+                    "two consecutive child nodes must have the same parent\n"
+                    );
+                    return FALSE;
+                }
+            }
+
+            if(iStatus != SUCCESS) {
                 fprintf(stderr,
-                "two consecutive child nodes must have the same parent\n"
+                "getNumChildren claims more children than getChild returns\n"
                 );
                 return FALSE;
             }
-         }
 
-         if(iStatus != SUCCESS) {
-            fprintf(stderr,
-            "getNumChildren claims more children than getChild returns\n"
-        );
-        return FALSE;
-         
-      }
-
-        /* make sure nodes are stored lexicographically */
-        if (oNChildPrev != NULL){
-            if (strcmp(Path_getPathname(Node_getPath(oNChild)),
-                   Path_getPathname(Node_getPath(oNChildPrev))) < 0) {
-                fprintf(stderr, "Nodes are not stored lexographically\n");
-                return FALSE;
+            /* make sure nodes are stored lexicographically */
+            if (oNChildPrev != NULL){
+                if (strcmp(Path_getPathname(Node_getPath(oNChild)),
+                    Path_getPathname(Node_getPath(oNChildPrev))) < 0) {
+                    fprintf(stderr, "Nodes are not stored lexographically\n");
+                    return FALSE;
+                }
             }
-        }
-        
-        /* check if there is another child of the same name */
-        for(ulIndexB = 0;
-            ulIndexB < Node_getNumChildren(oNNode);
-            ulIndexB++) {
-            Node_T oNChildB = NULL;
             
-            /* ignore case where indices are the same */
-            if (ulIndex == ulIndexB)
-                continue;
+            /* check if there is another child of the same name */
+            for(ulIndexB = 0;
+                ulIndexB < Node_getNumChildren(oNNode);
+                ulIndexB++) {
+                Node_T oNChildB = NULL;
+                
+                /* ignore case where indices are the same */
+                if (ulIndex == ulIndexB)
+                    continue;
 
-            iStatus = Node_getChild(oNNode, ulIndexB, &oNChildB);
-            /* DO WE NEED TO CHECK iStatus??????? */
+                iStatus = Node_getChild(oNNode, ulIndexB, &oNChildB);
+                /* DO WE NEED TO CHECK iStatus??????? */
 
-            if(Node_compare(oNChild, oNChildB) == 0) {
-                fprintf(stderr, "More than one identical node at %s\n",
-                        Path_getPathname(Node_getPath(oNNode)));
-                return FALSE;
+                if(Node_compare(oNChild, oNChildB) == 0) {
+                    fprintf(stderr, "More than one identical node at %s\n",
+                            Path_getPathname(Node_getPath(oNNode)));
+                    return FALSE;
+                }
             }
-        }
 
         /* if recurring down one subtree results in a failed check
-            farther down, passes the failure back up immediately */
+        farther down, passes the failure back up immediately */
         if(!CheckerDT_treeCheck(oNChild, ulCount, ulCumulative))
             return FALSE;
-      }
+        }
 
-   }
-   return TRUE;
+    }
+    return TRUE;
 }
 
 /* see checkerDT.h for specification */
 boolean CheckerDT_isValid(boolean bIsInitialized, Node_T oNRoot,
                           size_t ulCount) {
 
-    size_t ulCheck = 1;
+    size_t ulCheck = 0;
     boolean result;
 
    /* Sample check on a top-level data structure invariant:
