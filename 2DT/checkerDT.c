@@ -51,10 +51,9 @@ boolean CheckerDT_Node_isValid(Node_T oNNode) {
    parameter list to facilitate constructing your checks.
    If you do, you should update this function comment.
 */
-static boolean CheckerDT_treeCheck(Node_T oNNode, size_t ulCount) {
+static boolean CheckerDT_treeCheck(Node_T oNNode, size_t ulCount, size_t *ulCumulative) {
    size_t ulIndex;
    size_t ulIndexB;
-   size_t ulCheck = 0;
 
    if(oNNode!= NULL) {
 
@@ -63,6 +62,8 @@ static boolean CheckerDT_treeCheck(Node_T oNNode, size_t ulCount) {
       if(!CheckerDT_Node_isValid(oNNode))
          return FALSE;
 
+        *ulCumulative += Node_getNumChildren(oNNode);
+
       /* Recur on every child of oNNode */
       for(ulIndex = 0; ulIndex < Node_getNumChildren(oNNode); ulIndex++)
       {
@@ -70,8 +71,6 @@ static boolean CheckerDT_treeCheck(Node_T oNNode, size_t ulCount) {
          Node_T oNChild = NULL;
          Node_T oNChildPrev = NULL;
          int iStatus;
-
-        ulCheck++;
 
         /* check that two consecutive child nodes have the same parent
         */
@@ -126,14 +125,10 @@ static boolean CheckerDT_treeCheck(Node_T oNNode, size_t ulCount) {
 
         /* if recurring down one subtree results in a failed check
             farther down, passes the failure back up immediately */
-        if(!CheckerDT_treeCheck(oNChild, ulCount))
+        if(!CheckerDT_treeCheck(oNChild, ulCount, ulCumulative))
             return FALSE;
       }
 
-      if (ulCheck != Node_getNumChildren(oNNode)){
-         fprintf(stderr, "discrepancy in number of nodes in tree: %lu vs. %lu \n", ulCheck, Node_getNumChildren);
-         return FALSE;
-      }
    }
    return TRUE;
 }
@@ -141,6 +136,9 @@ static boolean CheckerDT_treeCheck(Node_T oNNode, size_t ulCount) {
 /* see checkerDT.h for specification */
 boolean CheckerDT_isValid(boolean bIsInitialized, Node_T oNRoot,
                           size_t ulCount) {
+
+    size_t ulCheck = 1;
+    boolean result;
 
    /* Sample check on a top-level data structure invariant:
       if the DT is not initialized, its count should be 0. */
@@ -151,5 +149,12 @@ boolean CheckerDT_isValid(boolean bIsInitialized, Node_T oNRoot,
       }
 
    /* Now checks invariants recursively at each node from the root. */
-   return CheckerDT_treeCheck(oNRoot, ulCount);
+   result =  CheckerDT_treeCheck(oNRoot, ulCount, &ulCheck);
+
+    if (ulCheck != ulCount){
+         fprintf(stderr, "discrepancy in number of nodes in tree: %lu vs. %lu \n", ulCheck, Node_getNumChildren);
+         return FALSE;
+    }
+
+    return result;
 }

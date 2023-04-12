@@ -22,11 +22,11 @@ boolean CheckerDT_Node_isValid(Node_T oNNode);
    The data structure's validity is based on a boolean
    bIsInitialized indicating whether the DT is in an initialized
    state, a Node_T oNRoot representing the root of the hierarchy, and
-   a size_t ulCount representing the total number of directories in
-   the hierarchy.
+   a size_t ulCumulative representing the cumulative number of Nodes
+   reached.
 */
 boolean CheckerDT_isValid(boolean bIsInitialized,
                           Node_T oNRoot,
-                          size_t ulCount);
+                          size_t ulCumulative);
 
 #endif
