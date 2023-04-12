@@ -91,15 +91,6 @@ static boolean CheckerDT_treeCheck(Node_T oNNode) {
                 fprintf(stderr, "Nodes are not stored lexographically\n");
                 return FALSE;
             }
-
-            path = Node_getPath(Node_getParent(oNChild));
-            pathPrev = Node_getPath(Node_getParent(oNChildPrev));
-            if (Node_getParent(oNChild) == Node_getParent(oNChildPrev)){
-               if (!strcmp(Path_getPathname(path), Path_getPathname(pathPrev))){
-                  fprintf(stderr, "The parent paths of two child nodes from the same parent must be equivalent\n");
-                  return FALSE;
-            }
-            }
         }
         
         /* check if there is another child of the same name */
