@@ -45,13 +45,8 @@ boolean CheckerDT_Node_isValid(Node_T oNNode) {
 /*
    Performs a pre-order traversal of the tree rooted at oNNode.
    Returns FALSE if a broken invariant is found and
-   returns TRUE otherwise. Calculates total number of nodes traversed
-   stored at *ulCumulative.
-   
-
-   You may want to change this function's return type or
-   parameter list to facilitate constructing your checks.
-   If you do, you should update this function comment.
+   returns TRUE otherwise, using total number of nodes traversed 
+   which is stored at *ulCumulative.
 */
 static boolean CheckerDT_treeCheck(Node_T oNNode, size_t *ulCumulative) {
    size_t ulIndex;
@@ -119,7 +114,7 @@ static boolean CheckerDT_treeCheck(Node_T oNNode, size_t *ulCumulative) {
                     continue;
 
                 iStatus = Node_getChild(oNNode, ulIndexB, &oNChildB);
-                /* DO WE NEED TO CHECK iStatus??????? */
+         
 
                 if(Node_compare(oNChild, oNChildB) == 0) {
                     fprintf(stderr,
