@@ -201,7 +201,7 @@ static size_t FT_preOrderTraversal(Node_T oNNode,
         
         /* set first free index to be given node */
         (void) DynArray_set(oDArray, ulIndex, oNNode);
-        ulIndex++
+        ulIndex++;
 
         if (Node_getNumChildren(oNNode, &ulChildren) == NOT_A_DIRECTORY)
         {
