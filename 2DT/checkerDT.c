@@ -62,7 +62,7 @@ static boolean CheckerDT_treeCheck(Node_T oNNode, size_t ulCount, size_t *ulCumu
         if(!CheckerDT_Node_isValid(oNNode))
             return FALSE;
 
-        if(Path_getDepth(oNNode) == 1){
+        if(Path_getDepth(Node_getPath(oNNode)) == 1){
             *ulCumulative = 1;
         }
 
