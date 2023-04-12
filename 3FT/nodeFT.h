@@ -90,4 +90,17 @@ char *Node_toString(Node_T oNNode);
 /* return the type of the node, either IS_FILE or IS_DIRECTORY*/
 nodeType Node_getType(Node_T oNNode);
 
+
+/* Assign the data at *pvContents (which is ulLength bytes long) to
+be the contents of oNNode. Indicate Return BAD_PATH if oNNode is a directory. 
+Otherwise return SUCCESS.*/
+int Node_insertFileContents(Node_T oNNode, void *pvContents, size_t 
+ulLength);
+
+/*  Return a pointer to the contents of oNNode.*/
+void *Node_getContents(Node_T oNNode)
+
+/*  Return the size in bytes of oNNode's contents.*/
+size_t Node_getSize(Node_T oNNode);
+
 #endif

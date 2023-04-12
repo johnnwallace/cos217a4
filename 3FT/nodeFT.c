@@ -21,6 +21,8 @@ struct node {
     nodeType type;
     /* the contents of the file; null if node is a directory */
     void *pvContents;
+    /* the size of the file; 0 if node is a directory */
+    size_t ulSize;
 };
 
 /* ------------------------------------------------------------------ */
@@ -211,9 +213,6 @@ size_t Node_free(Node_T oNNode) {
     /* remove path */
     Path_free(oNNode->oPPath);
 
-    /* remove contents if file */
-    free(oNNode -> pvContents);
-
     /* finally, free the struct node */
     free(oNNode);
     ulCount++;
@@ -314,7 +313,40 @@ char *Node_toString(Node_T oNNode) {
 }
 
 /* ------------------------------------------------------------------ */
-nodeType Node_getType(Node_T oNNode){
+
+int Node_insertFileContents(Node_T oNNode, void *pvContents, size_t 
+ulLength){
+    void *pvNewContents;
+    size_t i;
+
     assert(oNNode !=NULL);
+
+    if (oNNode -> type != IS_DIRECTORY)
+        return BAD_PATH;
+    
+    oNNode -> pvContents = pvContents;
+    oNNode -> ulSize = ulLength;
+
+    return SUCCESS;
+}
+
+/* ------------------------------------------------------------------ */
+
+void *Node_getContents(Node_T oNNode){
+    assert(oNNode != NULL);
+    return oNNode -> pvContents;
+}
+
+/* ------------------------------------------------------------------ */
+
+nodeType Node_getType(Node_T oNNode){
+    assert(oNNode != NULL);
     return oNNode -> type;
+}
+
+/* ------------------------------------------------------------------ */
+
+size_t Node_getSize(Node_T oNNode) {
+    assert(oNNode != NULL);
+    return oNNode -> ulSize;
 }
