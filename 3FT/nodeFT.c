@@ -312,3 +312,9 @@ char *Node_toString(Node_T oNNode) {
    else
       return strcpy(copyPath, Path_getPathname(Node_getPath(oNNode)));
 }
+
+/* ------------------------------------------------------------------ */
+nodeType Node_getType(Node_T oNNode){
+    assert(oNNode !=NULL);
+    return oNNode -> type;
+}

@@ -87,4 +87,7 @@ int Node_compare(Node_T oNFirst, Node_T oNSecond);
 */
 char *Node_toString(Node_T oNNode);
 
+/* return the type of the node, either IS_FILE or IS_DIRECTORY*/
+nodeType Node_getType(Node_T oNNode);
+
 #endif
