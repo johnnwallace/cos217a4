@@ -560,6 +560,8 @@ void *FT_replaceFileContents(const char *pcPath, void *pvNewContents,
                              size_t ulNewLength){
     int iStatus;
     Node_T oNFound = NULL;
+    void *pvOldContents;
+    int iStatus;
 
     assert(pcPath != NULL);
 
@@ -568,7 +570,13 @@ void *FT_replaceFileContents(const char *pcPath, void *pvNewContents,
         return NULL;
     }
 
-    Node_insertFileContents(oNFound, pvNewContents, ulNewLength);
+    pvOldContents = Node_getContents(oNFound);
+    iStatus = Node_insertFileContents(oNFound, pvNewContents, 
+    ulNewLength);
+
+    if (iStatus == SUCCESS)
+        return pvOldContents;
+    return null;
 }
 
 /* ------------------------------------------------------------------ */
@@ -622,34 +630,6 @@ int FT_destroy(void){
     bIsInitialized = FALSE;
 
     return SUCCESS;
-}
-
-/* ------------------------------------------------------------------ */
-
-/*
-  Alternate version of strlen that uses pulAcc as an in-out parameter
-  to accumulate a string length, rather than returning the length of
-  oNNode's path, and also always adds one addition byte to the sum.
-*/
-static void DT_strlenAccumulate(Node_T oNNode, size_t *pulAcc) {
-   assert(pulAcc != NULL);
-
-   if(oNNode != NULL)
-      *pulAcc += (Path_getStrLength(Node_getPath(oNNode)) + 1);
-}
-
-/*
-  Alternate version of strcat that inverts the typical argument
-  order, appending oNNode's path onto pcAcc, and also always adds one
-  newline at the end of the concatenated string.
-*/
-static void DT_strcatAccumulate(Node_T oNNode, char *pcAcc) {
-   assert(pcAcc != NULL);
-
-   if(oNNode != NULL) {
-      strcat(pcAcc, Path_getPathname(Node_getPath(oNNode)));
-      strcat(pcAcc, "\n");
-   }
 }
 
 /*--------------------------------------------------------------------*/
