@@ -10,6 +10,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "a4def.h"
 #include "dynarray.h"
 #include "path.h"
 #include "nodeFT.h"
