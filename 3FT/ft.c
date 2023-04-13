@@ -468,7 +468,7 @@ int FT_insertFile(const char *pcPath, void *pvContents,
         Path_free(oPPath);
         return CONFLICTING_PATH;
     }
-    else {
+    else { /* insert file as non-root */
         ulIndex = Path_getDepth(Node_getPath(oNCurr))+1;
 
         /* oNCurr is the node we're trying to insert */
