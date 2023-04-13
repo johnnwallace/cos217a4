@@ -49,8 +49,10 @@ boolean CheckerDT_Node_isValid(Node_T oNNode) {
    which is stored at *ulCumulative.
 */
 static boolean CheckerDT_treeCheck(Node_T oNNode, size_t *ulCumulative) {
-   size_t ulIndex;
-   size_t ulIndexB;
+    size_t ulIndex;
+    size_t ulIndexB;
+
+    assert(ulCumulative != NULL);
 
     if(oNNode!= NULL) {
 
