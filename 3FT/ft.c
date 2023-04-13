@@ -677,7 +677,7 @@ char *FT_toString(void){
       return NULL;
 
     nodes = DynArray_new(ulCount);
-    (void) DT_preOrderTraversal(oNRoot, nodes, 0);
+    (void) FT_preOrderTraversal(oNRoot, nodes, 0);
 
     DynArray_map(nodes, (void (*)(void *, void*)) FT_strlenAccumulate,
                 (void*) &totalStrlen);
