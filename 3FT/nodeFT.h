@@ -15,10 +15,10 @@
 typedef struct node *Node_T;
 
 /*
-  Creates a new node in the Directory Tree, with path oPPath and
-  parent oNParent. Returns an int SUCCESS status and sets *poNResult
-  to be the new node if successful. Otherwise, sets *poNResult to NULL
-  and returns status:
+  Creates a new node in the Directory Tree, with nodeType type, with
+  path oPPath and parent oNParent. Returns an int SUCCESS status and
+  sets *poNResult to be the new node if successful. Otherwise, sets
+  *poNResult to NULL and returns status:
   * MEMORY_ERROR if memory could not be allocated to complete request
   * CONFLICTING_PATH if oNParent's path is not an ancestor of oPPath
   * NO_SUCH_PATH if oPPath is of depth 0
@@ -87,7 +87,7 @@ int Node_compare(Node_T oNFirst, Node_T oNSecond);
 */
 char *Node_toString(Node_T oNNode);
 
-/* return the type of the node, either IS_FILE or IS_DIRECTORY*/
+/* return the type of oNNode, either IS_FILE or IS_DIRECTORY */
 nodeType Node_getType(Node_T oNNode);
 
 

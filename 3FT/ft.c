@@ -612,6 +612,7 @@ void *FT_replaceFileContents(const char *pcPath, void *pvNewContents,
     void *pvOldContents;
 
     assert(pcPath != NULL);
+    assert (pvNewContents != NULL);
 
     /* search for the node in the FT */ 
     iStatus = FT_findNode(pcPath, &oNFound);
@@ -637,6 +638,8 @@ int FT_stat(const char *pcPath, boolean *pbIsFile, size_t *pulSize){
     nodeType type;
 
     assert(pcPath != NULL);
+    assert(pbIsFile != NULL);
+    assert (pulSize != NULL);
     
     /* search for node */
     iStatus = FT_findNode(pcPath, &oNFound);
@@ -704,6 +707,7 @@ char *FT_toString(void){
     DynArray_map(nodes, (void (*)(void *, void*)) FT_strlenAccumulate,
                 (void*) &totalStrlen);
 
+    /* allocate mem*/
     result = malloc(totalStrlen);
     if(result == NULL) {
         DynArray_free(nodes);
@@ -711,7 +715,7 @@ char *FT_toString(void){
     }
     *result = '\0';
 
-    
+    /* apply cat accumulate function to array*/
     DynArray_map(nodes, (void (*)(void *, void*)) FT_strcatAccumulate,
                     (void *) result);
 

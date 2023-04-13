@@ -122,11 +122,24 @@ this error is excused in the spec.
 Example: Function DynArray_add declared but not defined
 Function Node_hasChild declared but not defined
 
+
+
+We get warnings on our nodeFT.c of the type "Function exported but not 
+used outside nodeFT: Node_getPath" which were excused in Ed post #558
+by Prof. Moretti as acceptable (since the functions are useful).
+
+
 ------------------------------------------------------------------------
 What warnings does critTer generate on your Part 3 code, and what are
 your disagreements with them? Copy the critTer warnings here, and
 express your disagreement after each warning. If there are no
 warnings, then write "None."
+
+Excused warning about loop length: "A loop should consist of fewer than 
+35 lines; this loop consists of 47 lines; consider refactoring"
+
+Excused warning about number of functions: "A file should contain no 
+more than 15 functions this file contains 17 functions"
 
 
 
