@@ -32,7 +32,7 @@ static size_t ulCount;
 /* ------------------------------------------------------------------ */
 
 /* The FT_traversePath and FT_findNode functions modularize the common
-functionality of going as far as possible down an DT towards a path
+functionality of going as far as possible down a FT towards a path
 and returning either the node of however far was reached or the
 node if the full path was reached, respectively.
 */
@@ -129,7 +129,7 @@ static int FT_traversePath(Path_T oPPath, Node_T *poNFurthest) {
   Traverses the FT to find a node with absolute path pcPath. Returns a
   int SUCCESS status and sets *poNResult to be the node, if found.
   Otherwise, sets *poNResult to NULL and returns with status:
-  * INITIALIZATION_ERROR if the DT is not in an initialized state
+  * INITIALIZATION_ERROR if the FT is not in an initialized state
   * BAD_PATH if pcPath does not represent a well-formatted path
   * CONFLICTING_PATH if the root's path is not a prefix of pcPath
   * NO_SUCH_PATH if no node with pcPath exists in the hierarchy
