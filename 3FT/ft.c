@@ -17,7 +17,7 @@
 #include "ft.h"
 
 /*
-  A Directory Tree is a representation of a hierarchy of directories,
+  A File Tree is a representation of a hierarchy of directories,
   represented as an AO with 3 state variables:
 */
 
@@ -73,6 +73,7 @@ static int FT_traversePath(Path_T oPPath, Node_T *poNFurthest) {
         return iStatus;
     }
 
+    /* make sure path doesn't conflict with one already in the FT */
     if(Path_comparePath(Node_getPath(oNRoot), oPPrefix)) {
         Path_free(oPPrefix);
         *poNFurthest = NULL;
@@ -143,17 +144,20 @@ static int FT_traversePath(Path_T oPPath, Node_T *poNFurthest) {
     assert(pcPath != NULL);
     assert(poNResult != NULL);
 
+    /* check if initialized*/
     if(!bIsInitialized) {
         *poNResult = NULL;
         return INITIALIZATION_ERROR;
     }
 
+    /* create path */
     iStatus = Path_new(pcPath, &oPPath);
     if(iStatus != SUCCESS) {
         *poNResult = NULL;
         return iStatus;
     }
 
+    /*traverse path */
     iStatus = FT_traversePath(oPPath, &oNFound);
     if(iStatus != SUCCESS)
     {
@@ -162,12 +166,14 @@ static int FT_traversePath(Path_T oPPath, Node_T *poNFurthest) {
         return iStatus;
     }
 
+    /* node not in pcPath */
     if(oNFound == NULL) {
         Path_free(oPPath);
         *poNResult = NULL;
         return NO_SUCH_PATH;
     }
 
+    /* node in tree but has diffent path*/ 
     if(Path_comparePath(Node_getPath(oNFound), oPPath) != 0) {
         Path_free(oPPath);
         *poNResult = NULL;
@@ -188,14 +194,14 @@ static int FT_traversePath(Path_T oPPath, Node_T *poNFurthest) {
 /*
   Performs a pre-order traversal of the tree rooted at oNNode,
   inserting each payload to DynArray_T oDArray beginning at index
-  ulIndex. Returns the next unused index in oDArray after the
-  insertion(s).
-*/
+  ulIndex with files before directories in lexicographic order. Returns 
+  the next unused index in oDArray after the insertion(s). */
 static size_t FT_preOrderTraversal(Node_T oNNode,
                                    DynArray_T oDArray, size_t ulIndex) {
     size_t count;
     DynArray_T oDSorted;
     assert(oDArray != NULL);
+    assert(oNNode != NULL);
 
     if(oNNode != NULL) {
         size_t ulChildren;
@@ -212,7 +218,7 @@ static size_t FT_preOrderTraversal(Node_T oNNode,
         
         oDSorted = DynArray_new(0);
         
-        /* sort children of node into lexicographic order, files first */
+        /* sort children of node into lexicographic order, files first*/
         for(count = 0; count < ulChildren; count++) {
             int iStatus;
 
@@ -225,7 +231,7 @@ static size_t FT_preOrderTraversal(Node_T oNNode,
                 DynArray_add(oDSorted, oNChild);
         }
 
-
+        /* add directories on the same level after the files */
         for(count = 0; count < ulChildren; count++) {
             int iStatus;
 
@@ -238,6 +244,7 @@ static size_t FT_preOrderTraversal(Node_T oNNode,
                 DynArray_add(oDSorted, oNChild);
         }
 
+        /* recur */
         for(count = 0; count < ulChildren; count++) {
             Node_T oNChild = NULL;
             oNChild = DynArray_get(oDSorted, count);
@@ -379,6 +386,7 @@ boolean FT_containsDir(const char *pcPath){
 
     assert(pcPath != NULL);
 
+    /* no possible path if no root */
     if (oNRoot == NULL)
         return FALSE;
 
@@ -386,6 +394,7 @@ boolean FT_containsDir(const char *pcPath){
     if (iStatus != SUCCESS)
         return FALSE;
 
+    /* file, not directory */
     if (Node_getType(oNFound) != IS_DIRECTORY) {
         return FALSE;
     }
@@ -402,12 +411,15 @@ int FT_rmDir(const char *pcPath){
    
     iStatus = FT_findNode(pcPath, &oNFound);
 
+    
     if (iStatus != SUCCESS)
         return iStatus;
     
+    /* file, not directory */
     if (Node_getType(oNFound) == IS_FILE)
         return NOT_A_DIRECTORY;
 
+    /* free subtree from the directory */
     ulCount -= Node_free(oNFound);
     if(ulCount == 0)
         oNRoot = NULL;
@@ -498,6 +510,7 @@ int FT_insertFile(const char *pcPath, void *pvContents,
             return iStatus;
         }
 
+        /* check if file, insert contents if yes */
         if (Node_getType(oNNewNode) == IS_FILE){
             iStatus = Node_insertFileContents(oNNewNode, 
             pvContents, ulLength);
@@ -539,10 +552,12 @@ boolean FT_containsFile(const char *pcPath){
     if (oNRoot == NULL)
         return FALSE;
 
+    /* search for file node in the FT */
     iStatus = FT_findNode(pcPath, &oNFound);
 
     if (iStatus != SUCCESS)
         return FALSE;
+    /* directory, not file */ 
     if (Node_getType(oNFound) != IS_FILE) {
         return FALSE;
     }
@@ -558,11 +573,13 @@ int FT_rmFile(const char *pcPath){
 
     assert(pcPath != NULL);
    
+    /* search for file node */
     iStatus = FT_findNode(pcPath, &oNFound);
 
     if (iStatus != SUCCESS)
         return iStatus;
     
+    /* directory, not file */
     if (Node_getType(oNFound) == IS_DIRECTORY)
         return NOT_A_FILE;
 
@@ -582,6 +599,7 @@ void *FT_getFileContents(const char *pcPath){
 
     assert(pcPath != NULL);
 
+    /* find node in the FT */
     iStatus = FT_findNode(pcPath, &oNFound);
     if (iStatus != SUCCESS) {
         return NULL;
