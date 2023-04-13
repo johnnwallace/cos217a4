@@ -210,7 +210,7 @@ static size_t FT_preOrderTraversal(Node_T oNNode,
             return ulIndex;
         }
         
-        oDSorted = DynArray_new(ulChildren);
+        oDSorted = DynArray_new(0);
         
         /* sort children of node into lexicographic order, files first */
         for(count = 0; count < ulChildren; count++) {
