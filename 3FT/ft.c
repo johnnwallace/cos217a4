@@ -194,7 +194,7 @@ static int FT_traversePath(Path_T oPPath, Node_T *poNFurthest) {
 static size_t FT_preOrderTraversal(Node_T oNNode,
                                    DynArray_T oDArray, size_t ulIndex) {
     size_t count;
-
+    DynArray_T oDSorted;
     assert(oDArray != NULL);
 
     if(oNNode != NULL) {
@@ -204,11 +204,13 @@ static size_t FT_preOrderTraversal(Node_T oNNode,
         (void) DynArray_set(oDArray, ulIndex, oNNode);
         ulIndex++;
 
+        /* base case - return the index if node is file (leaf node) */
         if (Node_getNumChildren(oNNode, &ulChildren) == NOT_A_DIRECTORY)
         {
             return ulIndex;
         }
         
+        /* sort children of node into lexicographic order, files first */
         for(count = 0; count < ulChildren; count++) {
             int iStatus;
 
@@ -216,6 +218,29 @@ static size_t FT_preOrderTraversal(Node_T oNNode,
             iStatus = Node_getChild(oNNode, count, &oNChild);
 
             assert(iStatus == SUCCESS);
+
+            if(Node_getType == IS_FILE)
+                DynArray_add(oDSorted, oNChild);
+        }
+
+
+        for(count = 0; count < ulChildren; count++) {
+            int iStatus;
+
+            Node_T oNChild = NULL;
+            iStatus = Node_getChild(oNNode, count, &oNChild);
+
+            assert(iStatus == SUCCESS);
+
+            if(Node_getType == IS_DIRECTORY)
+                DynArray_add(oDSorted, oNChild);
+        }
+
+        for(count = 0; count < ulChildren; count++) {
+            int iStatus;
+
+            Node_T oNChild = NULL;
+            oNChild = DynArray_get(oDSorted, count);
 
             ulIndex = FT_preOrderTraversal(oNChild, oDArray, ulIndex);
         }
