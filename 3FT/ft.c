@@ -632,7 +632,7 @@ void *FT_replaceFileContents(const char *pcPath, void *pvNewContents,
 /* ------------------------------------------------------------------ */
 
 int FT_stat(const char *pcPath, boolean *pbIsFile, size_t *pulSize){
-    Node_T oNFound;
+    Node_T oNFound = NULL;
     int iStatus;
     nodeType type;
 
