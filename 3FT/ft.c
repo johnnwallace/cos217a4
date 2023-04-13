@@ -203,7 +203,7 @@ static size_t FT_preOrderTraversal(Node_T oNNode,
     assert(oDArray != NULL);
 
     if(oNNode != NULL) {
-        size_t ulChildren;
+        size_t ulChildren = 0;
         
         /* set first free index to be given node */
         (void) DynArray_set(oDArray, ulIndex, oNNode);
