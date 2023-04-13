@@ -244,6 +244,8 @@ static size_t FT_preOrderTraversal(Node_T oNNode,
 
             ulIndex = FT_preOrderTraversal(oNChild, oDArray, ulIndex);
         }
+
+        DynArray_free(oDSorted);
     }
 
     return ulIndex;
