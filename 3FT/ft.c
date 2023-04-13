@@ -356,6 +356,8 @@ boolean FT_containsDir(const char *pcPath){
         return FALSE;
 
     iStatus = FT_findNode(pcPath, &oNFound);
+    if (iStatus != SUCCESS)
+        return FALSE;
 
     if (Node_getType(oNFound) != IS_DIRECTORY) {
         return FALSE;
