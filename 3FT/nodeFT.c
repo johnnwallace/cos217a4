@@ -8,6 +8,7 @@
 #include <string.h>
 #include "dynarray.h"
 #include "nodeFT.h"
+#include "a4def.h"
 
 /* A node in a FT */
 struct node {
@@ -251,6 +252,7 @@ boolean Node_hasChild(Node_T oNParent, Path_T oPPath,
 
 int Node_getNumChildren(Node_T oNParent, size_t *pulNum) {
     assert(oNParent != NULL);
+    assert(pulNum != NULL);
 
     /* verify oNParent is a directory */
     if (oNParent -> type == IS_FILE){

@@ -59,7 +59,6 @@ static int FT_traversePath(Path_T oPPath, Node_T *poNFurthest) {
     assert(oPPath != NULL);
     assert(poNFurthest != NULL);
 
-
     /* root is NULL -> won't find anything */
     if(oNRoot == NULL) {
         *poNFurthest = NULL;
@@ -136,7 +135,7 @@ static int FT_traversePath(Path_T oPPath, Node_T *poNFurthest) {
   * NO_SUCH_PATH if no node with pcPath exists in the hierarchy
   * MEMORY_ERROR if memory could not be allocated to complete request
  */
- static int FT_findNode(const char *pcPath, Node_T *poNResult) {
+static int FT_findNode(const char *pcPath, Node_T *poNResult) {
     Path_T oPPath = NULL;
     Node_T oNFound = NULL;
     int iStatus;
@@ -200,6 +199,7 @@ static size_t FT_preOrderTraversal(Node_T oNNode,
                                    DynArray_T oDArray, size_t ulIndex) {
     size_t count;
     DynArray_T oDSorted;
+
     assert(oDArray != NULL);
     assert(oNNode != NULL);
 
@@ -293,7 +293,6 @@ int FT_insertDir(const char *pcPath){
     Node_T oNCurr = NULL;
     size_t ulDepth, ulIndex;
     size_t ulNewNodes = 0;
-
 
     assert(pcPath != NULL);
   
@@ -425,7 +424,6 @@ int FT_rmDir(const char *pcPath){
         oNRoot = NULL;
 
     return SUCCESS;
-
 }
 
 /* ------------------------------------------------------------------ */
@@ -438,7 +436,6 @@ int FT_insertFile(const char *pcPath, void *pvContents,
     Node_T oNCurr = NULL;
     size_t ulDepth, ulIndex;
     size_t ulNewNodes = 0;
-
 
     assert(pcPath != NULL);
   
@@ -567,7 +564,6 @@ boolean FT_containsFile(const char *pcPath){
 /* ------------------------------------------------------------------ */
 
 int FT_rmFile(const char *pcPath){
-    
     int iStatus;
     Node_T oNFound = NULL;
 
@@ -618,11 +614,13 @@ void *FT_replaceFileContents(const char *pcPath, void *pvNewContents,
 
     assert(pcPath != NULL);
 
+    /* search for the node in the FT */ 
     iStatus = FT_findNode(pcPath, &oNFound);
     if (iStatus != SUCCESS) {
         return NULL;
     }
 
+    /* store old contents to return */ 
     pvOldContents = Node_getContents(oNFound);
     iStatus = Node_insertFileContents(oNFound, pvNewContents, 
     ulNewLength);
@@ -638,12 +636,16 @@ int FT_stat(const char *pcPath, boolean *pbIsFile, size_t *pulSize){
     Node_T oNFound;
     int iStatus;
     nodeType type;
+
+    assert(pcPath != NULL);
     
+    /* search for node */
     iStatus = FT_findNode(pcPath, &oNFound);
     if (iStatus != SUCCESS) {
         return iStatus;
     }
 
+    /* store node type, set type flags */ 
     type = Node_getType(oNFound);
     if (type == IS_DIRECTORY){
         *pbIsFile = FALSE;
@@ -675,6 +677,7 @@ int FT_destroy(void){
     if(!bIsInitialized)
         return INITIALIZATION_ERROR;
 
+    /* if FT has components, free them */
     if(oNRoot) {
         ulCount -= Node_free(oNRoot);
         oNRoot = NULL;
@@ -695,6 +698,7 @@ char *FT_toString(void){
     if(!bIsInitialized)
       return NULL;
 
+    /* add nodes to dyn array in specified order */
     nodes = DynArray_new(ulCount);
     (void) FT_preOrderTraversal(oNRoot, nodes, 0);
 
@@ -708,6 +712,7 @@ char *FT_toString(void){
     }
     *result = '\0';
 
+    
     DynArray_map(nodes, (void (*)(void *, void*)) FT_strcatAccumulate,
                     (void *) result);
 
