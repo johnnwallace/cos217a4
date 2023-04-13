@@ -320,7 +320,7 @@ ulLength){
 
     assert(oNNode !=NULL);
 
-    if (oNNode -> type != IS_DIRECTORY)
+    if (oNNode -> type == IS_DIRECTORY)
         return BAD_PATH;
     
     oNNode -> pvContents = pvContents;
