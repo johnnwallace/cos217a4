@@ -153,7 +153,7 @@ boolean CheckerDT_isValid(boolean bIsInitialized, Node_T oNRoot,
     result =  CheckerDT_treeCheck(oNRoot, &ulCheck);
 
     if (ulCheck != ulCount){
-        fprintf(stderr, "discrepancy in actual vs reported");
+        fprintf(stderr, "Discrepancy in actual vs reported ");
         fprintf(stderr, "number of nodes in tree: %lu vs. %lu \n",
                 ulCheck, ulCount);
         return FALSE;
