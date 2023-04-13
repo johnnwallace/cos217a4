@@ -73,7 +73,7 @@ int Node_new(Path_T oPPath, nodeType type, Node_T oNParent,
     Path_T oPParentPath = NULL;
     Path_T oPNewPath = NULL;
     int iStatus;
-    size_t ulIndex;
+    size_t ulIndex = 0;
     
     assert(oPPath != NULL);
 
@@ -189,7 +189,7 @@ int Node_compare(Node_T oNFirst, Node_T oNSecond) {
 
 
 size_t Node_free(Node_T oNNode) {
-    size_t ulIndex;
+    size_t ulIndex = 0;
     size_t ulCount = 0;
 
     assert(oNNode != NULL);
@@ -269,7 +269,7 @@ int Node_getChild(Node_T oNParent, size_t ulChildID,
                   Node_T *poNResult) {
 
     int iStatus;
-    size_t iChildren;
+    size_t iChildren = 0;
     
     assert(oNParent != NULL);
     assert(poNResult != NULL);

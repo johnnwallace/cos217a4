@@ -97,16 +97,30 @@ write "None."
 
 
 We get warnings about "deeply nested" areas which the spec says we can
-ignore. We get a warning about loop length (at line 70) which the spec
+ignore. We get a warning about loop length (at line 72) which the spec
 also says we can ignore. 
 
 examples: 
+
+-A loop should consist of fewer than 35 lines;
+this loop consists of 59 lines; consider refactoring
+
+-This area is deeply nested at level 4, consider refactoring
+
+
 ------------------------------------------------------------------------
 What warnings does splint generate on your Part 3 code, and what are
 your disagreements with them? Copy the splint warnings here, and
 express your disagreement after each warning. If there are no
 warnings, then write "None."
 
+We get warnings about Function ___ declared by not defined HOWEVER
+all of these warnings are identical (aside from function names) to those
+from part 2 and so we deduce they are due to reusing part 2 code; 
+this error is excused in the spec.
+
+Example: Function DynArray_add declared but not defined
+Function Node_hasChild declared but not defined
 
 ------------------------------------------------------------------------
 What warnings does critTer generate on your Part 3 code, and what are
