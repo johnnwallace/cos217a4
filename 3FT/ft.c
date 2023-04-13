@@ -264,7 +264,7 @@ static size_t FT_preOrderTraversal(Node_T oNNode,
 */
 static void FT_strlenAccumulate(Node_T oNNode, size_t *pulAcc) {
     assert(pulAcc != NULL);
-././
+
     if(oNNode != NULL)
         *pulAcc += (Path_getStrLength(Node_getPath(oNNode)) + 1);
 }
