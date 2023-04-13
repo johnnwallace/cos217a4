@@ -242,7 +242,7 @@ static size_t FT_preOrderTraversal(Node_T oNNode,
             Node_T oNChild = NULL;
             oNChild = DynArray_get(oDSorted, count);
 
-            ulIndex = FT_preOrderTraversal(oNChild, oDArray, ulIndex);
+            ulIndex = FT_preOrderTraversal(oNChild, oD./Array, ulIndex);
         }
     }
 
@@ -679,7 +679,7 @@ char *FT_toString(void){
     nodes = DynArray_new(ulCount);
     (void) DT_preOrderTraversal(oNRoot, nodes, 0);
 
-    DynArray_map(nodes, (void (*)(void *, void*)) DT_strlenAccumulate,
+    DynArray_map(nodes, (void (*)(void *, void*)) FT_strlenAccumulate,
                 (void*) &totalStrlen);
 
     result = malloc(totalStrlen);
@@ -689,7 +689,7 @@ char *FT_toString(void){
     }
     *result = '\0';
 
-    DynArray_map(nodes, (void (*)(void *, void*)) DT_strcatAccumulate,
+    DynArray_map(nodes, (void (*)(void *, void*)) FT_strcatAccumulate,
                     (void *) result);
 
     DynArray_free(nodes);
