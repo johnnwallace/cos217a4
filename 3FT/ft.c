@@ -210,6 +210,8 @@ static size_t FT_preOrderTraversal(Node_T oNNode,
             return ulIndex;
         }
         
+        oDSorted = DynArray_new(ulChildren);
+        
         /* sort children of node into lexicographic order, files first */
         for(count = 0; count < ulChildren; count++) {
             int iStatus;
@@ -237,8 +239,6 @@ static size_t FT_preOrderTraversal(Node_T oNNode,
         }
 
         for(count = 0; count < ulChildren; count++) {
-            int iStatus;
-
             Node_T oNChild = NULL;
             oNChild = DynArray_get(oDSorted, count);
 
@@ -393,10 +393,8 @@ boolean FT_containsDir(const char *pcPath){
 /* ------------------------------------------------------------------ */
 
 int FT_rmDir(const char *pcPath){
-
     int iStatus;
     Node_T oNFound = NULL;
-    int tempStatus;
 
     assert(pcPath != NULL);
    
