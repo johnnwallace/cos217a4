@@ -219,7 +219,7 @@ static size_t FT_preOrderTraversal(Node_T oNNode,
 
             assert(iStatus == SUCCESS);
 
-            if(Node_getType == IS_FILE)
+            if(Node_getType(oNChild) == IS_FILE)
                 DynArray_add(oDSorted, oNChild);
         }
 
@@ -232,7 +232,7 @@ static size_t FT_preOrderTraversal(Node_T oNNode,
 
             assert(iStatus == SUCCESS);
 
-            if(Node_getType == IS_DIRECTORY)
+            if(Node_getType(oNChild) == IS_DIRECTORY)
                 DynArray_add(oDSorted, oNChild);
         }
 
