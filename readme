@@ -18,6 +18,23 @@ in the file ~cos217/AuthorizedSourcesList ) to this section of the
 readme file, and edit it as appropriate.
 
 
+The course's lectures.
+
+The course's precepts.
+
+The course's website.
+
+Documents that are referenced directly by the course's website. Such 
+documents include the course's lecture slides and precept handouts.
+
+The man pages on the armlab cluster.
+
+The course's current staff members outside of class time through office 
+hours.
+
+The course's current staff members outside of class time through Ed.
+
+
 
 ------------------------------------------------------------------------
 Student 2: What authorized sources of information did you use to
@@ -25,6 +42,23 @@ complete the assignment? COPY THE LIST of authorized sources of
 information given in the "Policies" web page (also available on armlab
 in the file ~cos217/AuthorizedSourcesList ) to this section of the
 readme file, and edit it as appropriate.
+
+
+The course's lectures.
+
+The course's precepts.
+
+The course's website.
+
+Documents that are referenced directly by the course's website. Such 
+documents include the course's lecture slides and precept handouts.
+
+The man pages on the armlab cluster.
+
+The course's current staff members outside of class time through office 
+hours.
+
+The course's current staff members outside of class time through Ed.
 
 
 
@@ -41,6 +75,8 @@ being reported to the Committee on Discipline. Write "None" if you used
 no unauthorized sources of information.
 
 
+NONE
+
 
 ------------------------------------------------------------------------
 Student 2: What unauthorized sources of information did you use to
@@ -55,19 +91,22 @@ being reported to the Committee on Discipline. Write "None" if you used
 no unauthorized sources of information.
 
 
+NONE
+
 
 ------------------------------------------------------------------------
 Student 1: What is your assessment of the assignment? Was it helpful?
 Was it fun?
 
-
+I found this project long and tedious, but I understand its value in
+training debugging and modifying existing codebases.
 
 ------------------------------------------------------------------------
 Student 2: What is your assessment of the assignment? Was it helpful?
 Was it fun?
 
 
-excessively long burt helpful and fun 
+excessively long but helpful and fun 
 
 
 ------------------------------------------------------------------------
