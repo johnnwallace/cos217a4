@@ -136,7 +136,7 @@ static boolean CheckerDT_treeCheck(Node_T oNNode, size_t *ulCumulative) {
 
 /* see checkerDT.h for specification */
 boolean CheckerDT_isValid(boolean bIsInitialized, Node_T oNRoot,
-                          size_t ulCount) {
+                          size_t ulCumulative) {
 
     size_t ulCheck = 0;
     boolean result;

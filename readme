@@ -67,6 +67,8 @@ Student 2: What is your assessment of the assignment? Was it helpful?
 Was it fun?
 
 
+excessively long burt helpful and fun 
+
 
 ------------------------------------------------------------------------
 (optional) What information can you provide about your submission that
@@ -81,7 +83,11 @@ your disagreements with them? Copy the splint warnings here, and
 express your disagreement after each warning. If there are no
 warnings, then write "None."
 
+We get warnings about Function ___ declared by not defined HOWEVER
+none of the warnings generated have to do with code we wrote since
+we simply added to the body of CheckerDT.c (these were preexisting).
 
+Example: Function DynArray_add declared but not defined
 
 ------------------------------------------------------------------------
 What warnings does critTer generate on checkerDT.c, and what are your
@@ -90,13 +96,16 @@ your disagreement after each warning. If there are no warnings, then
 write "None."
 
 
+We get warnings about "deeply nested" areas which the spec says we can
+ignore. We get a warning about loop length (at line 70) which the spec
+also says we can ignore. 
 
+examples: 
 ------------------------------------------------------------------------
 What warnings does splint generate on your Part 3 code, and what are
 your disagreements with them? Copy the splint warnings here, and
 express your disagreement after each warning. If there are no
 warnings, then write "None."
-
 
 
 ------------------------------------------------------------------------
