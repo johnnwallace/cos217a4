@@ -437,6 +437,7 @@ int FT_insertFile(const char *pcPath, void *pvContents,
     size_t ulNewNodes = 0;
 
     assert(pcPath != NULL);
+    assert (pvContents != NULL);
   
     /* validate pcPath and generate a Path_T for it */
     if(!bIsInitialized)
