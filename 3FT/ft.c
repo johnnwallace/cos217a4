@@ -461,7 +461,10 @@ int FT_insertFile(const char *pcPath, void *pvContents,
         }
 
         /* insert the new directory type node for this level */
-        iStatus = Node_new(oPPrefix, IS_FILE, oNCurr, &oNNewNode);
+        if (ulIndex < ulDepth)
+            iStatus = Node_new(oPPrefix, IS_DIRECTORY, oNCurr, &oNNewNode);
+        else
+            iStatus = Node_new(oPPrefix, IS_FILE, oNCurr, &oNNewNode);
         if(iStatus != SUCCESS) {
             Path_free(oPPath);
             Path_free(oPPrefix);

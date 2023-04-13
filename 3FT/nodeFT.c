@@ -316,7 +316,6 @@ char *Node_toString(Node_T oNNode) {
 int Node_insertFileContents(Node_T oNNode, void *pvContents, size_t 
 ulLength){
     void *pvNewContents;
-    size_t i;
 
     assert(oNNode !=NULL);
 
