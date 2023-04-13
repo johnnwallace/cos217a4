@@ -201,7 +201,6 @@ static size_t FT_preOrderTraversal(Node_T oNNode,
     DynArray_T oDSorted;
 
     assert(oDArray != NULL);
-    assert(oNNode != NULL);
 
     if(oNNode != NULL) {
         size_t ulChildren;
