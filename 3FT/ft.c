@@ -242,7 +242,7 @@ static size_t FT_preOrderTraversal(Node_T oNNode,
             Node_T oNChild = NULL;
             oNChild = DynArray_get(oDSorted, count);
 
-            ulIndex = FT_preOrderTraversal(oNChild, oD./Array, ulIndex);
+            ulIndex = FT_preOrderTraversal(oNChild, oDArray, ulIndex);
         }
     }
 
